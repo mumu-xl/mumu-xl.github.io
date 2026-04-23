@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="一个前端，是怎么一边做 Flask 项目，一边靠 CodeX + Skill 把后端学进去的我一直觉得，前端去学后端，最容易踩的坑，不是“学不会”，而是“以为自己学会了”。 因为很多时候你确实能把功能做出来。比如注册、登录、查用户、改密码，这些接口，在 AI 的帮助下，通常都能很快跑通。 但问题是： 跑通，不等于真正理解。 我最近在做一个 Flask 项目，主要是练一个外卖小程序的后端。在这个过程">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://example.com/2026/04/17/skill-codex-python/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="一个前端，是怎么一边做 Flask 项目，一边靠 CodeX + Skill 把后端学进去的我一直觉得，前端去学后端，最容易踩的坑，不是“学不会”，而是“以为自己学会了”。 因为很多时候你确实能把功能做出来。比如注册、登录、查用户、改密码，这些接口，在 AI 的帮助下，通常都能很快跑通。 但问题是： 跑通，不等于真正理解。 我最近在做一个 Flask 项目，主要是练一个外卖小程序的后端。在这个过程">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2026-04-17T07:56:32.294Z">
+<meta property="article:modified_time" content="2026-04-23T03:19:16.027Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css">
+
+<meta name="generator" content="Hexo 8.1.1"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-skill-codex-python" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2026/04/17/skill-codex-python/" class="article-date">
+  <time class="dt-published" datetime="2026-04-17T07:56:32.294Z" itemprop="datePublished">2026-04-17</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="一个前端，是怎么一边做-Flask-项目，一边靠-CodeX-Skill-把后端学进去的"><a href="#一个前端，是怎么一边做-Flask-项目，一边靠-CodeX-Skill-把后端学进去的" class="headerlink" title="一个前端，是怎么一边做 Flask 项目，一边靠 CodeX + Skill 把后端学进去的"></a>一个前端，是怎么一边做 Flask 项目，一边靠 CodeX + Skill 把后端学进去的</h1><p>我一直觉得，前端去学后端，最容易踩的坑，不是“学不会”，而是“以为自己学会了”。</p>
+<p>因为很多时候你确实能把功能做出来。<br>比如注册、登录、查用户、改密码，这些接口，在 AI 的帮助下，通常都能很快跑通。</p>
+<p>但问题是：</p>
+<p><strong>跑通，不等于真正理解。</strong></p>
+<p>我最近在做一个 Flask 项目，主要是练一个外卖小程序的后端。在这个过程中，我感受特别深的一点是：</p>
+<p><strong>CodeX 搭配 Skill，最有价值的不是“帮我写代码”，而是“逼着我去理解我为什么要这样写”。</strong></p>
+<p>这篇文章我不想写得太教程，也不想写得像产品介绍。<br>我更想从一个前端开发者的角度，聊聊我是怎么在这个项目里，一边踩坑，一边慢慢把后端这件事想明白的。</p>
+<hr>
+<h2 id="一开始，我的后端思路其实很“前端”"><a href="#一开始，我的后端思路其实很“前端”" class="headerlink" title="一开始，我的后端思路其实很“前端”"></a>一开始，我的后端思路其实很“前端”</h2><p>说白了，刚开始做 Flask 的时候，我的习惯很简单：</p>
+<p><strong>先把功能塞进一个接口里，跑起来再说。</strong></p>
+<p>比如登录，我一开始最自然的写法就是这种：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@user_bp.post(<span class="params"><span class="string">&quot;/login&quot;</span></span>)</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">login</span>():</span><br><span class="line">    data = request.get_json()</span><br><span class="line">    nickname = data.get(<span class="string">&quot;nickname&quot;</span>)</span><br><span class="line">    password = data.get(<span class="string">&quot;password&quot;</span>)</span><br><span class="line"></span><br><span class="line">    user = User.query.filter_by(nickname=nickname).first()</span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> user:</span><br><span class="line">        <span class="keyword">return</span> &#123;<span class="string">&quot;message&quot;</span>: <span class="string">&quot;用户不存在&quot;</span>&#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> user.password == password:</span><br><span class="line">        <span class="keyword">return</span> &#123;<span class="string">&quot;message&quot;</span>: <span class="string">&quot;登录成功&quot;</span>&#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> &#123;<span class="string">&quot;message&quot;</span>: <span class="string">&quot;密码错误&quot;</span>&#125;</span><br></pre></td></tr></table></figure>
+
+<p>现在回头看，这段代码的问题其实挺明显的：</p>
+<ul>
+<li>路由里直接查数据库</li>
+<li>密码直接明文比较</li>
+<li>返回结构不统一</li>
+<li>没有业务层</li>
+<li>没有数据边界</li>
+<li>没有错误控制</li>
+<li>没有登录态</li>
+</ul>
+<p>但我必须承认，<strong>这段代码在刚开始的时候，对我来说是“顺手”的。</strong></p>
+<p>为什么？</p>
+<p>因为前端很多时候也是这样开始的：</p>
+<ul>
+<li>先把交互跑起来</li>
+<li>先把接口调通</li>
+<li>先把页面显示出来</li>
+</ul>
+<p>只是到了后端，如果你一直这样写，很快就会乱。</p>
+<hr>
+<h2 id="CodeX-Skill-最有用的地方，是它不让我糊里糊涂“跑过去”"><a href="#CodeX-Skill-最有用的地方，是它不让我糊里糊涂“跑过去”" class="headerlink" title="CodeX + Skill 最有用的地方，是它不让我糊里糊涂“跑过去”"></a>CodeX + Skill 最有用的地方，是它不让我糊里糊涂“跑过去”</h2><p>我觉得普通 AI 和“带 Skill 的 AI”最大的区别是：</p>
+<p>普通 AI 很容易帮你把事做完。但 Skill 会不断提醒你：</p>
+<ul>
+<li>这个逻辑为什么不该写在这里？</li>
+<li>这个值为什么不能相信前端传的？</li>
+<li>这个异常到底是业务错误，还是系统错误？</li>
+<li>这个 token 校验为什么适合抽成装饰器？</li>
+</ul>
+<p>这些问题刚开始会觉得烦，后面会发现特别有价值。</p>
+<p>因为前端转后端，最缺的不是“后端答案”，而是：</p>
+<p><strong>后端判断。</strong></p>
+<hr>
+<h2 id="我这个项目里，最先学会的不是功能，而是“分层”"><a href="#我这个项目里，最先学会的不是功能，而是“分层”" class="headerlink" title="我这个项目里，最先学会的不是功能，而是“分层”"></a>我这个项目里，最先学会的不是功能，而是“分层”</h2><p>我做的是一个 Flask + Flask-SQLAlchemy 的小项目，用户模块是最先推进的那部分。</p>
+<p>项目里慢慢形成了这样一套结构：</p>
+<ul>
+<li><code>views</code>：接请求，回响应</li>
+<li><code>service</code>：做业务逻辑</li>
+<li><code>dao</code>：查数据库、写数据库</li>
+<li><code>models</code>：定义表</li>
+<li><code>schemas</code>：控制返回数据结构</li>
+</ul>
+<p>这套东西我一开始其实也会觉得有点“绕”。</p>
+<p>比如只是登录，为什么不能在 <code>views.py</code> 里直接写完？</p>
+<p>后来 CodeX 一直在反复提醒我一件事：</p>
+<p><strong>后端里最怕的不是多写几层，而是职责混掉。</strong></p>
+<p>比如登录这件事，拆开之后就会变得很清楚。</p>
+<h3 id="views-层只负责接请求"><a href="#views-层只负责接请求" class="headerlink" title="views 层只负责接请求"></a><code>views</code> 层只负责接请求</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@user_bp.post(<span class="params"><span class="string">&quot;/login&quot;</span></span>)</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">login</span>():</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        data = request.get_json(silent=<span class="literal">True</span>)</span><br><span class="line">        <span class="keyword">if</span> data <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">            <span class="keyword">return</span> error(code=<span class="number">400</span>, message=<span class="string">&quot;请求体格式错误&quot;</span>), <span class="number">400</span></span><br><span class="line"></span><br><span class="line">        nickname = data.get(<span class="string">&quot;nickname&quot;</span>)</span><br><span class="line">        password = data.get(<span class="string">&quot;password&quot;</span>)</span><br><span class="line"></span><br><span class="line">        user = UserService.get_user(nickname, password)</span><br><span class="line">        <span class="keyword">return</span> ok(data=user, message=<span class="string">&quot;ok&quot;</span>), <span class="number">200</span></span><br><span class="line">    <span class="keyword">except</span> UserError <span class="keyword">as</span> e:</span><br><span class="line">        <span class="keyword">return</span> error(code=<span class="number">400</span>, message=<span class="built_in">str</span>(e)), <span class="number">400</span></span><br></pre></td></tr></table></figure>
+
+<p>这一层只做这些事：</p>
+<ul>
+<li>拿请求参数</li>
+<li>调用 service</li>
+<li>返回结果</li>
+</ul>
+<p>它不应该管：</p>
+<ul>
+<li>数据库怎么查</li>
+<li>密码怎么校验</li>
+<li>token 怎么生成</li>
+</ul>
+<hr>
+<h3 id="service-层负责业务判断"><a href="#service-层负责业务判断" class="headerlink" title="service 层负责业务判断"></a><code>service</code> 层负责业务判断</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@staticmethod</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">get_user</span>(<span class="params">nickname, password</span>) -&gt; <span class="built_in">dict</span>:</span><br><span class="line">    <span class="keyword">if</span> nickname <span class="keyword">is</span> <span class="literal">None</span> <span class="keyword">or</span> nickname.strip() == <span class="string">&quot;&quot;</span>:</span><br><span class="line">        <span class="keyword">raise</span> UserError(<span class="string">&quot;用户名不能为空&quot;</span>)</span><br><span class="line">    <span class="keyword">if</span> password <span class="keyword">is</span> <span class="literal">None</span> <span class="keyword">or</span> password.strip() == <span class="string">&quot;&quot;</span>:</span><br><span class="line">        <span class="keyword">raise</span> UserError(<span class="string">&quot;密码不能为空&quot;</span>)</span><br><span class="line"></span><br><span class="line">    user = UserDAO.get_user(nickname)</span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> user:</span><br><span class="line">        <span class="keyword">raise</span> UserError(<span class="string">&quot;用户名或密码不正确&quot;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> check_password_hash(user.password, password):</span><br><span class="line">        token = UtilsToken.generate_token(&#123;</span><br><span class="line">            <span class="string">&quot;user_id&quot;</span>: user.<span class="built_in">id</span>,</span><br><span class="line">            <span class="string">&quot;nickname&quot;</span>: user.nickname</span><br><span class="line">        &#125;)</span><br><span class="line">        <span class="keyword">return</span> UserSchema.login_model(user, token)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">raise</span> UserError(<span class="string">&quot;用户名或密码不正确&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>这一层开始做“后端真正的判断”：</p>
+<ul>
+<li>参数是否为空</li>
+<li>用户是否存在</li>
+<li>密码是否正确</li>
+<li>登录成功后应该返回什么</li>
+</ul>
+<p>我后来慢慢意识到，前端转后端最重要的一步，就是习惯把“业务判断”从“请求处理”里拆出来。</p>
+<hr>
+<h3 id="dao-层负责数据库动作"><a href="#dao-层负责数据库动作" class="headerlink" title="dao 层负责数据库动作"></a><code>dao</code> 层负责数据库动作</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@staticmethod</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">get_user</span>(<span class="params">nickname</span>) -&gt; <span class="type">Optional</span>[User]:</span><br><span class="line">    <span class="keyword">return</span> db.session.execute(</span><br><span class="line">        db.select(User).filter_by(nickname=nickname)</span><br><span class="line">    ).scalar_one_or_none()</span><br></pre></td></tr></table></figure>
+
+<p>这层的意义是：</p>
+<p><strong>只管查库，不管业务。</strong></p>
+<p>它不去判断：</p>
+<ul>
+<li>用户名对不对</li>
+<li>能不能登录</li>
+<li>应不应该返回什么提示语</li>
+</ul>
+<p>它只做一件事：</p>
+<ul>
+<li>这个昵称对应的用户，数据库里有没有</li>
+</ul>
+<p>我以前做前端的时候，其实没有那么强的“数据边界”意识。<br>但后端项目如果没有这层边界，后面真的会非常乱。</p>
+<hr>
+<h2 id="我真正开始理解后端，是在做“登录注册”这些最普通的功能时"><a href="#我真正开始理解后端，是在做“登录注册”这些最普通的功能时" class="headerlink" title="我真正开始理解后端，是在做“登录注册”这些最普通的功能时"></a>我真正开始理解后端，是在做“登录注册”这些最普通的功能时</h2><p>很有意思的一点是，我不是在做什么特别高级的功能时学会后端的。</p>
+<p>恰恰相反，我是在做最普通的这些东西时，慢慢理解的：</p>
+<ul>
+<li>注册</li>
+<li>登录</li>
+<li>获取用户详情</li>
+<li>修改密码</li>
+<li>token 鉴权</li>
+</ul>
+<p>这些东西看起来平平无奇，但它们几乎把后端最核心的知识都串起来了。</p>
+<h3 id="例如密码这件小事"><a href="#例如密码这件小事" class="headerlink" title="例如密码这件小事"></a>例如密码这件小事</h3><p>一开始特别容易直觉写成：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> user.password == password:</span><br><span class="line">    ...</span><br></pre></td></tr></table></figure>
+
+<p>但当你真正做登录时，就会慢慢理解：</p>
+<ul>
+<li>数据库里不能存明文密码</li>
+<li>注册时应该哈希后再存</li>
+<li>登录时应该校验哈希</li>
+<li>修改密码时，新密码也应该重新哈希</li>
+</ul>
+<p>最后就会变成这种更合理的写法：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> werkzeug.security <span class="keyword">import</span> generate_password_hash, check_password_hash</span><br><span class="line"></span><br><span class="line">hashed = generate_password_hash(password)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> check_password_hash(user.password, old_password):</span><br><span class="line">    ...</span><br></pre></td></tr></table></figure>
+
+<p>这种“看起来只是改了一个函数”的事情，其实背后是后端安全意识的开始。</p>
+<hr>
+<h2 id="token-鉴权让我第一次真正感觉到“后端边界感”很重要"><a href="#token-鉴权让我第一次真正感觉到“后端边界感”很重要" class="headerlink" title="token 鉴权让我第一次真正感觉到“后端边界感”很重要"></a>token 鉴权让我第一次真正感觉到“后端边界感”很重要</h2><p>前面做注册登录时，我更多是在理解分层。<br>但做到 token 鉴权时，我第一次特别明显地感觉到：</p>
+<p><strong>后端很多设计，不是为了写得优雅，而是为了避免你把信任给错对象。</strong></p>
+<p>比如一开始做“修改密码”，我其实很自然会写成这样：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">nickname = data.get(<span class="string">&quot;nickname&quot;</span>)</span><br><span class="line">old_password = data.get(<span class="string">&quot;old_password&quot;</span>)</span><br><span class="line">new_password = data.get(<span class="string">&quot;new_password&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>然后根据 <code>nickname</code> 去查用户、改密码。</p>
+<p>在“没接 token”之前，这看起来好像没问题。<br>但一旦开始做登录态，就会意识到这个设计有漏洞：</p>
+<p><strong>为什么我还要相信前端传给我的 <code>nickname</code>？</strong></p>
+<p>既然已经登录了，当前用户是谁，本来就应该来自 token，而不是来自前端再传一遍。</p>
+<p>这个点对我触动挺大的。</p>
+<p>因为它让我真正意识到：</p>
+<p><strong>后端开发的很多边界设计，本质上是在回答“我到底该信什么”。</strong></p>
+<ul>
+<li>token 能信到什么程度</li>
+<li>body 里的字段能不能信</li>
+<li>path 参数能不能直接用</li>
+<li>哪些身份信息必须从登录态里拿</li>
+</ul>
+<p>这种思考，是以前纯做前端时比较少被迫面对的。</p>
+<p>后来我把修改密码这条链路改掉之后，逻辑就清楚很多了：</p>
+<h3 id="我一开始的思路"><a href="#我一开始的思路" class="headerlink" title="我一开始的思路"></a>我一开始的思路</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">user = UserDAO.get_user(nickname)</span><br></pre></td></tr></table></figure>
+
+<h3 id="后来调整后的思路"><a href="#后来调整后的思路" class="headerlink" title="后来调整后的思路"></a>后来调整后的思路</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">payload = g.user</span><br><span class="line">user = UserDAO.get_user_info(payload.get(<span class="string">&quot;user_id&quot;</span>))</span><br></pre></td></tr></table></figure>
+
+<p>这看起来只是数据来源变了一下，但本质上是：</p>
+<p><strong>从“信前端输入”变成了“信登录态”。</strong></p>
+<p>这个区别，真的是做了之后才会有感觉。</p>
+<hr>
+<h2 id="我甚至觉得，统一鉴权装饰器，比我学会-token-本身更重要"><a href="#我甚至觉得，统一鉴权装饰器，比我学会-token-本身更重要" class="headerlink" title="我甚至觉得，统一鉴权装饰器，比我学会 token 本身更重要"></a>我甚至觉得，统一鉴权装饰器，比我学会 token 本身更重要</h2><p>刚开始做 token 的时候，我其实更关注这些：</p>
+<ul>
+<li>怎么生成 token</li>
+<li>怎么解析 token</li>
+<li>怎么设置过期时间</li>
+<li>Authorization 怎么传</li>
+</ul>
+<p>但后来我发现，真正让我对后端结构有感觉的，反而不是 token 本身，而是：</p>
+<p><strong>我该把鉴权逻辑放在哪里。</strong></p>
+<p>一开始我其实把很多东西写在 <code>service</code> 里，比如直接去读请求头：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">authorization = request.headers.get(<span class="string">&quot;Authorization&quot;</span>)</span><br><span class="line">token = authorization.split(<span class="string">&quot; &quot;</span>)[<span class="number">1</span>]</span><br><span class="line">payload = UtilsToken.params_token(token)</span><br></pre></td></tr></table></figure>
+
+<p>这段代码不能说完全错，但它让我越来越不舒服。<br>因为 <code>service</code> 本来应该关心的是“业务”，结果它开始关心 HTTP 请求头了。</p>
+<p>后来我慢慢把它抽成统一装饰器：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> functools <span class="keyword">import</span> wraps</span><br><span class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> request, jsonify, g</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">require_auth</span>(<span class="params">fun</span>):</span><br><span class="line"><span class="meta">    @wraps(<span class="params">fun</span>)</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">wrapper</span>(<span class="params">*args, **kwargs</span>):</span><br><span class="line">        authorization = request.headers.get(<span class="string">&quot;Authorization&quot;</span>)</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> authorization:</span><br><span class="line">            <span class="keyword">return</span> jsonify(&#123;<span class="string">&quot;code&quot;</span>: <span class="number">401</span>, <span class="string">&quot;message&quot;</span>: <span class="string">&quot;Unauthorized&quot;</span>&#125;), <span class="number">401</span></span><br><span class="line"></span><br><span class="line">        parts = authorization.split(<span class="string">&quot; &quot;</span>, <span class="number">1</span>)</span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">len</span>(parts) != <span class="number">2</span> <span class="keyword">or</span> parts[<span class="number">0</span>] != <span class="string">&quot;Bearer&quot;</span>:</span><br><span class="line">            <span class="keyword">return</span> jsonify(&#123;<span class="string">&quot;code&quot;</span>: <span class="number">401</span>, <span class="string">&quot;message&quot;</span>: <span class="string">&quot;Invalid Authorization header&quot;</span>&#125;), <span class="number">401</span></span><br><span class="line"></span><br><span class="line">        token = parts[<span class="number">1</span>]</span><br><span class="line">        payload = UtilsToken.params_token(token)</span><br><span class="line">        g.user = payload</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> fun(*args, **kwargs)</span><br><span class="line">    <span class="keyword">return</span> wrapper</span><br></pre></td></tr></table></figure>
+
+<p>然后在需要登录的接口上挂：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@user_bp.get(<span class="params"><span class="string">&quot;/&lt;user_id&gt;&quot;</span></span>)</span></span><br><span class="line"><span class="meta">@require_auth</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">detail</span>(<span class="params">user_id</span>):</span><br><span class="line">    payload = g.user</span><br><span class="line">    user_info = UserService.get_user_info(user_id, payload)</span><br><span class="line">    <span class="keyword">return</span> ok(data=user_info, message=<span class="string">&quot;ok&quot;</span>), <span class="number">200</span></span><br></pre></td></tr></table></figure>
+
+<p>做到这里的时候，我第一次比较明确地感觉到：</p>
+<p><strong>后端的“整洁感”，很多时候不是来自代码少，而是来自通用逻辑放在了该放的位置。</strong></p>
+<hr>
+<h2 id="测试让我承认一件事：我经常以为自己写对了，其实没有"><a href="#测试让我承认一件事：我经常以为自己写对了，其实没有" class="headerlink" title="测试让我承认一件事：我经常以为自己写对了，其实没有"></a>测试让我承认一件事：我经常以为自己写对了，其实没有</h2><p>我后来补测试的时候，有一个很真实的感受：</p>
+<p><strong>测试不是为了证明我厉害，测试是为了证明我其实没那么稳。</strong></p>
+<p>比如我写注册测试时，一开始还会把返回结构断言错：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">assert</span> response.get_json().data[<span class="string">&quot;nickname&quot;</span>] == <span class="string">&quot;test&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>结果就报错，因为 <code>response.get_json()</code> 返回的是 <code>dict</code>，不是对象。</p>
+<p>后来改成：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">assert</span> response.get_json()[<span class="string">&quot;data&quot;</span>][<span class="string">&quot;nickname&quot;</span>] == <span class="string">&quot;test&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>还有一些更典型的问题：</p>
+<ul>
+<li>我以为详情接口已经接了 token，结果测试一跑发现根本没带 header</li>
+<li>我以为 JSON 错误处理统一了，结果非法请求体还是 200</li>
+<li>我以为修改密码已经只认当前用户了，结果代码里还在偷偷信任 body 里的昵称</li>
+</ul>
+<p>这些坑如果没有测试，真的很容易糊过去。</p>
+<p>我现在越来越觉得，测试最大的价值不是“保证项目稳定”，而是：</p>
+<p><strong>逼你面对你自己以为已经理解、其实还没完全理解的地方。</strong></p>
+<h3 id="例如测试注册成功"><a href="#例如测试注册成功" class="headerlink" title="例如测试注册成功"></a>例如测试注册成功</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">test_register_success</span>(<span class="params">app</span>):</span><br><span class="line">    client = app.test_client()</span><br><span class="line"></span><br><span class="line">    response = client.post(</span><br><span class="line">        <span class="string">&quot;/users/register&quot;</span>,</span><br><span class="line">        json=&#123;<span class="string">&quot;nickname&quot;</span>: <span class="string">&quot;test&quot;</span>, <span class="string">&quot;password&quot;</span>: <span class="string">&quot;123456&quot;</span>&#125;,</span><br><span class="line">    )</span><br><span class="line"></span><br><span class="line">    result = response.get_json()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">assert</span> response.status_code == <span class="number">200</span></span><br><span class="line">    <span class="keyword">assert</span> result[<span class="string">&quot;code&quot;</span>] == <span class="number">0</span></span><br><span class="line">    <span class="keyword">assert</span> result[<span class="string">&quot;data&quot;</span>][<span class="string">&quot;nickname&quot;</span>] == <span class="string">&quot;test&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="例如测试修改密码"><a href="#例如测试修改密码" class="headerlink" title="例如测试修改密码"></a>例如测试修改密码</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">test_update_password</span>(<span class="params">app</span>):</span><br><span class="line">    client = app.test_client()</span><br><span class="line"></span><br><span class="line">    client.post(<span class="string">&quot;/users/register&quot;</span>, json=&#123;</span><br><span class="line">        <span class="string">&quot;nickname&quot;</span>: <span class="string">&quot;test&quot;</span>,</span><br><span class="line">        <span class="string">&quot;password&quot;</span>: <span class="string">&quot;123456&quot;</span></span><br><span class="line">    &#125;)</span><br><span class="line"></span><br><span class="line">    login_response = client.post(<span class="string">&quot;/users/login&quot;</span>, json=&#123;</span><br><span class="line">        <span class="string">&quot;nickname&quot;</span>: <span class="string">&quot;test&quot;</span>,</span><br><span class="line">        <span class="string">&quot;password&quot;</span>: <span class="string">&quot;123456&quot;</span></span><br><span class="line">    &#125;)</span><br><span class="line"></span><br><span class="line">    token = login_response.get_json()[<span class="string">&quot;data&quot;</span>][<span class="string">&quot;token&quot;</span>]</span><br><span class="line"></span><br><span class="line">    response = client.patch(</span><br><span class="line">        <span class="string">&quot;/users/update_password&quot;</span>,</span><br><span class="line">        json=&#123;<span class="string">&quot;old_password&quot;</span>: <span class="string">&quot;123456&quot;</span>, <span class="string">&quot;new_password&quot;</span>: <span class="string">&quot;9999&quot;</span>&#125;,</span><br><span class="line">        headers=&#123;<span class="string">&quot;Authorization&quot;</span>: <span class="string">f&quot;Bearer <span class="subst">&#123;token&#125;</span>&quot;</span>&#125;</span><br><span class="line">    )</span><br><span class="line"></span><br><span class="line">    <span class="keyword">assert</span> response.status_code == <span class="number">200</span></span><br><span class="line">    <span class="keyword">assert</span> response.get_json()[<span class="string">&quot;code&quot;</span>] == <span class="number">0</span></span><br></pre></td></tr></table></figure>
+
+<p>以前我会觉得“能改成功就行了”，现在会更在意：</p>
+<ul>
+<li>是不是必须带 token</li>
+<li>当前用户身份是不是来自 token</li>
+<li>返回结构是不是稳定</li>
+</ul>
+<p>这其实就是后端项目意识慢慢长出来的过程。</p>
+<hr>
+<h2 id="我后来越来越觉得，Skill-的价值不在“会写”，而在“会陪你拆”"><a href="#我后来越来越觉得，Skill-的价值不在“会写”，而在“会陪你拆”" class="headerlink" title="我后来越来越觉得，Skill 的价值不在“会写”，而在“会陪你拆”"></a>我后来越来越觉得，Skill 的价值不在“会写”，而在“会陪你拆”</h2><p>如果让我现在回头看，我会觉得 CodeX + Skill 最有价值的，不是它能把 Flask 项目写得多快，而是它能让我在项目里持续问对问题。</p>
+<p>比如这些问题，我现在越来越习惯自己去想了：</p>
+<ul>
+<li>这段逻辑到底该放 <code>views</code> 还是 <code>service</code>？</li>
+<li>这个失败是业务冲突，还是数据库系统错误？</li>
+<li>这个 token 校验该放在路由里，还是装饰器里？</li>
+<li>修改密码时，用户身份该来自 body，还是来自 token？</li>
+<li>这个查询为什么更适合放 DAO？</li>
+<li>这个返回值为什么必须经过 schema？</li>
+</ul>
+<p>说白了，Skill 让 AI 不再只是“帮我做事”，而是“帮我形成判断”。</p>
+<p>我觉得这对前端尤其重要。</p>
+<p>因为前端转后端，最怕的不是暂时不会写，而是一直停留在“我只能看着答案理解”的状态。</p>
+<h2 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h2><p>我现在当然还不算什么“后端老手”。</p>
+<p>但我能明显感觉到，和最开始相比，我的变化已经不是“会多写几个 Flask 接口”这么简单了。</p>
+<p>而是我开始慢慢能分清这些事情：</p>
+<ul>
+<li>什么逻辑应该留在 <code>views</code></li>
+<li>什么逻辑应该下沉到 <code>service</code></li>
+<li>什么信息不能再信前端传的</li>
+<li>什么错误是业务错误，什么是系统错误</li>
+<li>为什么 token 不只是“登录成功后多返回一个字符串”</li>
+</ul>
+<p>如果一定要总结一句我自己的感受，我会说：</p>
+<p><strong>CodeX + Skill 帮我最大的，不是把后端写出来，而是让我在真实项目里，慢慢长出后端思维。</strong></p>
+<p>这件事，比“又学会一个函数”重要得多。</p>
+<p>如果你也是前端，想往后端走，我真的会推荐你试试这种方式：</p>
+<p><strong>不要只是让 AI 替你写代码，而是让它陪你把项目里的每一个问题慢慢想明白。</strong></p>
+<p>这件事，可能比“又学会了一个框架函数”更重要。</p>
+<hr>
+<h2 id="附：几个我自己特别有感触的代码对比"><a href="#附：几个我自己特别有感触的代码对比" class="headerlink" title="附：几个我自己特别有感触的代码对比"></a>附：几个我自己特别有感触的代码对比</h2><h3 id="1-刚开始的登录思路"><a href="#1-刚开始的登录思路" class="headerlink" title="1. 刚开始的登录思路"></a>1. 刚开始的登录思路</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">user = User.query.filter_by(nickname=nickname).first()</span><br><span class="line"><span class="keyword">if</span> <span class="keyword">not</span> user:</span><br><span class="line">    <span class="keyword">return</span> &#123;<span class="string">&quot;message&quot;</span>: <span class="string">&quot;用户不存在&quot;</span>&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> user.password == password:</span><br><span class="line">    <span class="keyword">return</span> &#123;<span class="string">&quot;message&quot;</span>: <span class="string">&quot;登录成功&quot;</span>&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="后来改成的登录思路"><a href="#后来改成的登录思路" class="headerlink" title="后来改成的登录思路"></a>后来改成的登录思路</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">user = UserDAO.get_user(nickname)</span><br><span class="line"><span class="keyword">if</span> <span class="keyword">not</span> user:</span><br><span class="line">    <span class="keyword">raise</span> UserError(<span class="string">&quot;用户名或密码不正确&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> check_password_hash(user.password, password):</span><br><span class="line">    token = UtilsToken.generate_token(&#123;</span><br><span class="line">        <span class="string">&quot;user_id&quot;</span>: user.<span class="built_in">id</span>,</span><br><span class="line">        <span class="string">&quot;nickname&quot;</span>: user.nickname</span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="keyword">return</span> UserSchema.login_model(user, token)</span><br></pre></td></tr></table></figure>
+
+<p>差别不只是“用了哈希”和“加了 token”，而是开始有了：</p>
+<ul>
+<li>分层</li>
+<li>错误边界</li>
+<li>登录态</li>
+<li>返回结构控制</li>
+</ul>
+<hr>
+<h3 id="2-刚开始的修改密码思路"><a href="#2-刚开始的修改密码思路" class="headerlink" title="2. 刚开始的修改密码思路"></a>2. 刚开始的修改密码思路</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">nickname = data.get(<span class="string">&quot;nickname&quot;</span>)</span><br><span class="line">user = UserDAO.get_user(nickname)</span><br><span class="line">user.password = new_password</span><br><span class="line">db.session.commit()</span><br></pre></td></tr></table></figure>
+
+<h3 id="后来改成的修改密码思路"><a href="#后来改成的修改密码思路" class="headerlink" title="后来改成的修改密码思路"></a>后来改成的修改密码思路</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">payload = g.user</span><br><span class="line">user = UserDAO.get_user_info(payload.get(<span class="string">&quot;user_id&quot;</span>))</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> check_password_hash(user.password, old_password):</span><br><span class="line">    info = UserDAO.update_password(user, generate_password_hash(new_password))</span><br><span class="line">    <span class="keyword">return</span> UserSchema.from_model(info)</span><br></pre></td></tr></table></figure>
+
+<p>这个变化背后最大的区别是：</p>
+<p><strong>不再相信前端随便传来的身份字段，而是相信服务端已经校验过的登录态。</strong></p>
+<hr>
+<h3 id="3-刚开始的鉴权逻辑"><a href="#3-刚开始的鉴权逻辑" class="headerlink" title="3. 刚开始的鉴权逻辑"></a>3. 刚开始的鉴权逻辑</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">authorization = request.headers.get(<span class="string">&quot;Authorization&quot;</span>)</span><br><span class="line">token = authorization.split(<span class="string">&quot; &quot;</span>)[<span class="number">1</span>]</span><br><span class="line">payload = UtilsToken.params_token(token)</span><br></pre></td></tr></table></figure>
+
+<h3 id="后来抽成统一装饰器"><a href="#后来抽成统一装饰器" class="headerlink" title="后来抽成统一装饰器"></a>后来抽成统一装饰器</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">require_auth</span>(<span class="params">fun</span>):</span><br><span class="line"><span class="meta">    @wraps(<span class="params">fun</span>)</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">wrapper</span>(<span class="params">*args, **kwargs</span>):</span><br><span class="line">        authorization = request.headers.get(<span class="string">&quot;Authorization&quot;</span>)</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> authorization:</span><br><span class="line">            <span class="keyword">return</span> jsonify(&#123;<span class="string">&quot;code&quot;</span>: <span class="number">401</span>, <span class="string">&quot;message&quot;</span>: <span class="string">&quot;Unauthorized&quot;</span>&#125;), <span class="number">401</span></span><br><span class="line"></span><br><span class="line">        parts = authorization.split(<span class="string">&quot; &quot;</span>, <span class="number">1</span>)</span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">len</span>(parts) != <span class="number">2</span> <span class="keyword">or</span> parts[<span class="number">0</span>] != <span class="string">&quot;Bearer&quot;</span>:</span><br><span class="line">            <span class="keyword">return</span> jsonify(&#123;<span class="string">&quot;code&quot;</span>: <span class="number">401</span>, <span class="string">&quot;message&quot;</span>: <span class="string">&quot;Invalid Authorization header&quot;</span>&#125;), <span class="number">401</span></span><br><span class="line"></span><br><span class="line">        token = parts[<span class="number">1</span>]</span><br><span class="line">        payload = UtilsToken.params_token(token)</span><br><span class="line">        g.user = payload</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> fun(*args, **kwargs)</span><br><span class="line">    <span class="keyword">return</span> wrapper</span><br></pre></td></tr></table></figure>
+
+<p>这一步让我特别有感觉的一点是：</p>
+<p><strong>后端很多“变整洁”的瞬间，不是靠魔法，而是靠你愿不愿意把重复逻辑抽出来。</strong></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2026/04/17/skill-codex-python/" data-id="cuidjJDzxHSVhJS_O_ztc6tXE" data-title="" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/04/">April 2026</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2026/04/17/skill-codex-python/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2026 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
