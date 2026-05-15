@@ -6,21 +6,21 @@
   
   <title>浏览器执行原理和性能提升 | mumu</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="浏览器是如何下载js文件的呢？首先在浏览器中输入域名，然后这个域名将转化服务器的IP地址，这个IP地址将返回一个文件，就是图中的index.html文件，这个时候浏览器开始解析这个网页，解析到link标签就下载css文件，解析到script标签就下载js文件。 浏览器的渲染过程 浏览器将html，css，js文件下载下来后就开始解析，这个时候由浏览器内核中的HtmlParse模块将HTML标签编">
+  <meta name="description" content="浏览器是如何下载js文件的呢？首先在浏览器中输入域名，然后这个域名将转化服务器的IP地址，这个IP地址将返回一个文件，就是图中的index.html文件，这个时候浏览器开始解析这个网页，解析到link标签就下载css文件，解析到script标签就下载js文件。 浏览器的渲染过程  浏览器将html，css，js文件下载下来后就开始解析，这个时候由浏览器内核中的HtmlParse模块将HTML标签">
 <meta property="og:type" content="article">
 <meta property="og:title" content="浏览器执行原理和性能提升">
 <meta property="og:url" content="http://example.com/2026/05/15/V8/index.html">
 <meta property="og:site_name" content="mumu">
-<meta property="og:description" content="浏览器是如何下载js文件的呢？首先在浏览器中输入域名，然后这个域名将转化服务器的IP地址，这个IP地址将返回一个文件，就是图中的index.html文件，这个时候浏览器开始解析这个网页，解析到link标签就下载css文件，解析到script标签就下载js文件。 浏览器的渲染过程 浏览器将html，css，js文件下载下来后就开始解析，这个时候由浏览器内核中的HtmlParse模块将HTML标签编">
+<meta property="og:description" content="浏览器是如何下载js文件的呢？首先在浏览器中输入域名，然后这个域名将转化服务器的IP地址，这个IP地址将返回一个文件，就是图中的index.html文件，这个时候浏览器开始解析这个网页，解析到link标签就下载css文件，解析到script标签就下载js文件。 浏览器的渲染过程  浏览器将html，css，js文件下载下来后就开始解析，这个时候由浏览器内核中的HtmlParse模块将HTML标签">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://example.com/2026/05/15/V8/6a0694dcd4d40.png">
 <meta property="og:image" content="http://example.com/2026/05/15/V8/6a06942b22d3e.png">
+<meta property="og:image" content="http://example.com/2026/05/15/V8/6a0694dcd4d40.png">
 <meta property="og:image" content="http://example.com/2026/05/15/V8/6a069376b728c.png">
 <meta property="article:published_time" content="2026-05-15T03:02:56.000Z">
-<meta property="article:modified_time" content="2026-05-15T04:26:37.163Z">
+<meta property="article:modified_time" content="2026-05-15T04:33:18.847Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/2026/05/15/V8/6a0694dcd4d40.png">
+<meta name="twitter:image" content="http://example.com/2026/05/15/V8/6a06942b22d3e.png">
   
     <link rel="alternate" href="/atom.xml" title="mumu" type="application/atom+xml">
   
@@ -99,9 +99,10 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <img src="/2026/05/15/V8/6a0694dcd4d40.png" class="" title="图片描述">
+        <img src="/2026/05/15/V8/6a06942b22d3e.png" class="" title="屏幕截图 2021-11-23 123753.png">
 <h5 id="浏览器是如何下载js文件的呢？"><a href="#浏览器是如何下载js文件的呢？" class="headerlink" title="浏览器是如何下载js文件的呢？"></a>浏览器是如何下载js文件的呢？</h5><p>首先在浏览器中输入域名，然后这个域名将转化服务器的IP地址，这个IP地址将返回一个文件，就是图中的index.html文件，这个时候浏览器开始解析这个网页，解析到link标签就下载css文件，解析到script标签就下载js文件。</p>
-<h1 id="浏览器的渲染过程"><a href="#浏览器的渲染过程" class="headerlink" title="浏览器的渲染过程"></a>浏览器的渲染过程</h1><img src="/2026/05/15/V8/6a06942b22d3e.png" class="" title="屏幕截图 2021-11-23 123753.png">
+<h1 id="浏览器的渲染过程"><a href="#浏览器的渲染过程" class="headerlink" title="浏览器的渲染过程"></a>浏览器的渲染过程</h1><img src="/2026/05/15/V8/6a0694dcd4d40.png" class="" title="图片描述">
+
 <p>浏览器将html，css，js文件下载下来后就开始解析，这个时候由浏览器内核中的HtmlParse模块将HTML标签编译成DOMTree，这个时候可以利用js进行DOM操作将HTML元素插入到DOMTree中，而浏览器则是通过浏览器引擎来解析js的，我们在下面的内容将会重点将浏览器V8引擎。<br>   DOMTtree生成以后将会开始解析css文件，通过cssParse模块将css解析为StyleRulesTree，接下来DOMTree和StyleRulesTree将会结合形成RenderTree。</p>
 <p>   RenderTree生成以后通过Layout引擎根据浏览器大小来生成新的renderTree，然后绘制出来，浏览器开始展示。由于有些html标签定位不同，这个时候浏览器大小不同，元素位置就不同，layout引擎的作用就是重新生成一个适合当前浏览器大小的renderTree。</p>
 <h1 id="V8引擎"><a href="#V8引擎" class="headerlink" title="V8引擎"></a>V8引擎</h1><h4 id="JS引擎"><a href="#JS引擎" class="headerlink" title="JS引擎"></a>JS引擎</h4><p>高级的编程语言都是需要转成最终的机器指令来执行的</p>
