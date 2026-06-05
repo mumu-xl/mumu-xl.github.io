@@ -193,26 +193,15 @@
 <td><code>/opsx:archive</code></td>
 <td>归档阶段：将完成的变更合并到 specs&#x2F; 并移至 archive&#x2F;</td>
 </tr>
-<tr>
-<td><code>/opsx:sync</code></td>
-<td>同步：将增量规范同步到主规范</td>
-</tr>
-<tr>
-<td><code>/opsx:verify</code></td>
-<td>验证：检查实现是否匹配规范</td>
-</tr>
-<tr>
-<td><code>/opsx:ff</code></td>
-<td>快进模式：一次性生成所有规划文件（跳过逐步交互）</td>
-</tr>
-<tr>
-<td><code>/opsx:continue</code></td>
-<td>继续：逐步创建下一个 artifact</td>
-</tr>
 </tbody></table>
+<!-- | `/opsx:sync` | 同步：将增量规范同步到主规范 |
+| `/opsx:verify` | 验证：检查实现是否匹配规范 |
+| `/opsx:ff` | 快进模式：一次性生成所有规划文件（跳过逐步交互） |
+| `/opsx:continue` | 继续：逐步创建下一个 artifact | -->
+
 <hr>
 <h2 id="OpenSpec-的完整工作流"><a href="#OpenSpec-的完整工作流" class="headerlink" title="OpenSpec 的完整工作流"></a>OpenSpec 的完整工作流</h2><p>一个需求从想法到上线，经过以下阶段：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">/opsx:explore     → 探索。梳理想法，看看现有代码库有没有冲突，不创建文件。</span><br><span class="line">/opsx:propose     → 提案。生成 proposal.md + tasks.md + design.md + 规范增量 spec.md</span><br><span class="line">      ↓</span><br><span class="line">   人工审查       → 这是最关键的一步。检查 proposal 和 spec md，确认需求有没有表达清楚。</span><br><span class="line">      ↓</span><br><span class="line">/opsx:apply       → 实施。AI 按 tasks.md 逐条执行，写完一条勾一条。</span><br><span class="line">      ↓</span><br><span class="line">/opsx:verify      → 验证。对着 spec.md 检查代码实现是否完整、有没有遗漏。</span><br><span class="line">      ↓</span><br><span class="line">/opsx:archive     → 归档。合并增量到主规范库 specs/，变更移至 archive/。</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">/opsx:explore     → 探索。梳理想法，看看现有代码库有没有冲突，不创建文件。</span><br><span class="line">/opsx:propose     → 提案。生成 proposal.md + tasks.md + design.md + 规范增量 spec.md</span><br><span class="line">      ↓</span><br><span class="line">   人工审查       → 这是最关键的一步。检查 proposal 和 spec md，确认需求有没有表达清楚。</span><br><span class="line">      ↓</span><br><span class="line">/opsx:apply       → 实施。AI 按 tasks.md 逐条执行，写完一条勾一条。</span><br><span class="line">      ↓</span><br><span class="line">/opsx:archive     → 归档。合并增量到主规范库 specs/，变更移至 archive/。</span><br></pre></td></tr></table></figure>
 
 <p>不是所有需求都要走完整流程。OpenSpec 官方给出了很实用的判断标准：</p>
 <table>
@@ -285,10 +274,15 @@
 <li>最后写测试</li>
 </ol>
 <p>每完成一条就勾掉一条。因为每个任务都有明确的 spec.md 做约束，AI 不会跑偏。</p>
-<h3 id="第五步：验证"><a href="#第五步：验证" class="headerlink" title="第五步：验证"></a>第五步：验证</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/opsx:verify</span><br></pre></td></tr></table></figure>
+<!-- ### 第五步：验证
 
-<p>AI 会对着 spec.md 里的每条约束和边界情况，检查代码是否完整实现。漏了哪条、哪条验收标准没满足，一目了然。</p>
-<h3 id="第六步：归档"><a href="#第六步：归档" class="headerlink" title="第六步：归档"></a>第六步：归档</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/opsx:archive</span><br></pre></td></tr></table></figure>
+```
+/opsx:verify
+```
+
+AI 会对着 spec.md 里的每条约束和边界情况，检查代码是否完整实现。漏了哪条、哪条验收标准没满足，一目了然。 -->
+
+<h3 id="第五步：归档"><a href="#第五步：归档" class="headerlink" title="第五步：归档"></a>第五步：归档</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/opsx:archive</span><br></pre></td></tr></table></figure>
 
 <p>增量 spec 合并到 <code>openspec/specs/article-favorites/spec.md</code>，变更文件夹移到 <code>changes/archive/</code>。从此系统规范里就有了「文章收藏」这一章。下次 AI 做相关功能时，它能读到这份规范，知道现状是什么样的。</p>
 <hr>
