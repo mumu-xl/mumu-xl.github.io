@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 720" role="img" aria-labelledby="title desc">
+  <title id="title">Node 事件循环阶段图</title>
+  <desc id="desc">展示 Node 事件循环中的 timers、pending callbacks、poll、check、close callbacks 以及微任务的关系。</desc>
+  <defs>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <path d="M2,2 L10,6 L2,10 Z" fill="#0f766e"/>
+    </marker>
+    <style>
+      .bg{fill:#f8fafc}
+      .title{font:700 32px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;fill:#0f172a}
+      .sub{font:400 17px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;fill:#475569}
+      .phase{fill:#fff;stroke:#99f6e4;stroke-width:3;rx:20}
+      .micro{fill:#fef3c7;stroke:#f59e0b;stroke-width:2;rx:18}
+      .label{font:700 22px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;fill:#0f172a}
+      .small{font:400 16px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;fill:#334155}
+      .line{fill:none;stroke:#0f766e;stroke-width:4;marker-end:url(#arrow)}
+      .loop{fill:none;stroke:#0f766e;stroke-width:4;stroke-dasharray:10 8;marker-end:url(#arrow)}
+    </style>
+  </defs>
+  <rect class="bg" width="1200" height="720"/>
+  <text x="60" y="70" class="title">Node 事件循环：每一轮都在调度不同队列</text>
+  <text x="60" y="104" class="sub">同步代码先执行；每个回调后处理微任务；事件循环再进入下一个阶段</text>
+
+  <rect x="100" y="175" width="250" height="100" class="phase"/>
+  <text x="225" y="216" text-anchor="middle" class="label">timers</text>
+  <text x="225" y="246" text-anchor="middle" class="small">setTimeout / setInterval</text>
+
+  <rect x="475" y="175" width="250" height="100" class="phase"/>
+  <text x="600" y="216" text-anchor="middle" class="label">pending callbacks</text>
+  <text x="600" y="246" text-anchor="middle" class="small">延迟到本轮的系统回调</text>
+
+  <rect x="850" y="175" width="250" height="100" class="phase"/>
+  <text x="975" y="216" text-anchor="middle" class="label">poll</text>
+  <text x="975" y="246" text-anchor="middle" class="small">等待和执行 I/O 回调</text>
+
+  <rect x="850" y="420" width="250" height="100" class="phase"/>
+  <text x="975" y="461" text-anchor="middle" class="label">check</text>
+  <text x="975" y="491" text-anchor="middle" class="small">setImmediate</text>
+
+  <rect x="475" y="420" width="250" height="100" class="phase"/>
+  <text x="600" y="461" text-anchor="middle" class="label">close callbacks</text>
+  <text x="600" y="491" text-anchor="middle" class="small">socket close 等关闭事件</text>
+
+  <rect x="100" y="420" width="250" height="100" class="micro"/>
+  <text x="225" y="461" text-anchor="middle" class="label">microtasks</text>
+  <text x="225" y="491" text-anchor="middle" class="small">nextTick / Promise.then</text>
+
+  <path class="line" d="M350 225 H472"/>
+  <path class="line" d="M725 225 H847"/>
+  <path class="line" d="M975 275 V417"/>
+  <path class="line" d="M850 470 H728"/>
+  <path class="line" d="M475 470 H352"/>
+  <path class="loop" d="M225 420 C90 340, 20 210, 98 210"/>
+
+  <text x="70" y="610" class="small">微任务不是独立的大阶段。可以把它理解成：当前 JS 回调执行完后，Node 会先清空 nextTick / Promise 等微任务，再继续推进事件循环。</text>
+  <text x="70" y="645" class="small">如果一个回调执行太久，或者不断塞 nextTick，后面的 I/O 回调就会被延迟。</text>
+</svg>

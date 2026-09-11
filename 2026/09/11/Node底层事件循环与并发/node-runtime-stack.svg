@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 720" role="img" aria-labelledby="title desc">
+  <title id="title">Node 运行时架构图</title>
+  <desc id="desc">展示 JavaScript 应用、Node 标准库、V8、libuv、线程池和操作系统之间的分层关系。</desc>
+  <defs>
+    <style>
+      .bg{fill:#f8fafc}
+      .title{font:700 32px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;fill:#0f172a}
+      .sub{font:400 17px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;fill:#475569}
+      .layer{fill:#fff;stroke:#cbd5e1;stroke-width:2;rx:18}
+      .blue{fill:#eff6ff;stroke:#60a5fa}
+      .green{fill:#ecfdf5;stroke:#34d399}
+      .purple{fill:#f5f3ff;stroke:#8b5cf6}
+      .yellow{fill:#fffbeb;stroke:#f59e0b}
+      .gray{fill:#f1f5f9;stroke:#94a3b8}
+      .label{font:700 24px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;fill:#0f172a}
+      .small{font:400 16px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;fill:#334155}
+      .mono{font:600 15px ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;fill:#0f172a}
+    </style>
+  </defs>
+  <rect class="bg" width="1200" height="720"/>
+  <text x="60" y="70" class="title">Node 运行时不是只有一个线程</text>
+  <text x="60" y="104" class="sub">JavaScript 在主线程执行；底层由 V8、Node 核心模块、libuv、线程池和操作系统配合</text>
+
+  <rect x="100" y="145" width="1000" height="90" class="layer blue"/>
+  <text x="600" y="182" text-anchor="middle" class="label">你的 JavaScript / TypeScript 业务代码</text>
+  <text x="600" y="213" text-anchor="middle" class="small">Controller、路由、回调、async/await、Promise</text>
+
+  <rect x="100" y="270" width="1000" height="90" class="layer"/>
+  <text x="600" y="307" text-anchor="middle" class="label">Node.js 标准库与核心 API</text>
+  <text x="600" y="338" text-anchor="middle" class="mono">fs / http / net / timers / stream / crypto</text>
+
+  <rect x="100" y="395" width="470" height="120" class="layer purple"/>
+  <text x="335" y="438" text-anchor="middle" class="label">V8</text>
+  <text x="335" y="470" text-anchor="middle" class="small">执行 JavaScript</text>
+  <text x="335" y="498" text-anchor="middle" class="small">管理调用栈、对象、垃圾回收</text>
+
+  <rect x="630" y="395" width="470" height="120" class="layer green"/>
+  <text x="865" y="438" text-anchor="middle" class="label">libuv</text>
+  <text x="865" y="470" text-anchor="middle" class="small">事件循环、异步 I/O、定时器</text>
+  <text x="865" y="498" text-anchor="middle" class="small">线程池、跨平台系统封装</text>
+
+  <rect x="100" y="550" width="300" height="90" class="layer gray"/>
+  <text x="250" y="587" text-anchor="middle" class="label">操作系统 I/O</text>
+  <text x="250" y="618" text-anchor="middle" class="small">epoll / kqueue / IOCP</text>
+
+  <rect x="450" y="550" width="300" height="90" class="layer yellow"/>
+  <text x="600" y="587" text-anchor="middle" class="label">libuv 线程池</text>
+  <text x="600" y="618" text-anchor="middle" class="small">fs / crypto / zlib / dns</text>
+
+  <rect x="800" y="550" width="300" height="90" class="layer gray"/>
+  <text x="950" y="587" text-anchor="middle" class="label">系统资源</text>
+  <text x="950" y="618" text-anchor="middle" class="small">文件、网络、进程、定时器</text>
+
+  <path d="M600 235 V268" stroke="#2563eb" stroke-width="4"/>
+  <path d="M600 360 V392" stroke="#2563eb" stroke-width="4"/>
+  <path d="M865 515 C820 545, 730 550, 600 550" stroke="#059669" stroke-width="4" fill="none"/>
+  <path d="M865 515 C780 545, 420 550, 250 550" stroke="#059669" stroke-width="4" fill="none"/>
+  <path d="M865 515 C900 545, 930 550, 950 550" stroke="#059669" stroke-width="4" fill="none"/>
+</svg>

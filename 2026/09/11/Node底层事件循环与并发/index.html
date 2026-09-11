@@ -1,0 +1,285 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Node在AI时代有哪些优势？ | mumu</title><meta name="author" content="John Doe"><meta name="copyright" content="John Doe"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="在AI时代下，NodeJS在国内的出场率变的高了一些，从claude code 到 deepseek harness 甚至是小龙虾等优秀的Agent都是使用node开发的，在AI的浪潮下，为什么Node会在这么多语言下脱引而出。 I&#x2F;O 为什么拖慢程序后端程序里，真正慢的往往不是 CPU 运算，而是 I&#x2F;O。 比如：  读文件 查数据库 请求第三方接口 读取 socket 数据">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Node在AI时代有哪些优势？">
+<meta property="og:url" content="http://example.com/2026/09/11/Node%E5%BA%95%E5%B1%82%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF%E4%B8%8E%E5%B9%B6%E5%8F%91/index.html">
+<meta property="og:site_name" content="mumu">
+<meta property="og:description" content="在AI时代下，NodeJS在国内的出场率变的高了一些，从claude code 到 deepseek harness 甚至是小龙虾等优秀的Agent都是使用node开发的，在AI的浪潮下，为什么Node会在这么多语言下脱引而出。 I&#x2F;O 为什么拖慢程序后端程序里，真正慢的往往不是 CPU 运算，而是 I&#x2F;O。 比如：  读文件 查数据库 请求第三方接口 读取 socket 数据">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/img/butterfly-icon.jpg">
+<meta property="article:published_time" content="2026-09-11T08:20:00.000Z">
+<meta property="article:modified_time" content="2026-09-11T03:21:59.796Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="JavaScript">
+<meta property="article:tag" content="Node.js">
+<meta property="article:tag" content="事件循环">
+<meta property="article:tag" content="后端">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/img/butterfly-icon.jpg"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Node在AI时代有哪些优势？",
+  "url": "http://example.com/2026/09/11/Node%E5%BA%95%E5%B1%82%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF%E4%B8%8E%E5%B9%B6%E5%8F%91/",
+  "image": "http://example.com/img/butterfly-icon.jpg",
+  "datePublished": "2026-09-11T08:20:00.000Z",
+  "dateModified": "2026-09-11T03:21:59.796Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "John Doe",
+      "url": "http://example.com"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/favicon.jpg"><link rel="canonical" href="http://example.com/2026/09/11/Node%E5%BA%95%E5%B1%82%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF%E4%B8%8E%E5%B9%B6%E5%8F%91/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.7.0"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.3.1/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        const data = { value }
+
+        if (ttl != null) {
+          data.expiry = Date.now() + ttl * 86400000
+        }
+
+        localStorage.setItem(key, JSON.stringify(data))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return
+
+        try {
+          const data = JSON.parse(itemStr)
+
+          if (data.expiry && Date.now() > data.expiry) {
+            localStorage.removeItem(key)
+            return
+          }
+
+          return data.value
+        } catch {
+          localStorage.removeItem(key)
+        }
+      }
+    }
+
+    const scriptCache = new Map()
+    const cssCache = new Map()
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => {
+        if (scriptCache.has(url)) {
+          return scriptCache.get(url)
+        }
+
+        const promise = new Promise((resolve, reject) => {
+          const script = document.createElement('script')
+
+          script.src = url
+          script.async = true
+
+          for (const key in attr) {
+            script.setAttribute(key, attr[key])
+          }
+
+          script.onload = resolve
+          script.onerror = reject
+
+          document.head.appendChild(script)
+        })
+
+        scriptCache.set(url, promise)
+
+        return promise
+      },
+      getCSS: (url, id) => {
+        if (cssCache.has(url)) {
+          return cssCache.get(url)
+        }
+
+        const promise = new Promise((resolve, reject) => {
+          const link = document.createElement('link')
+
+          link.rel = 'stylesheet'
+          link.href = url
+
+          if (id) {
+            link.id = id
+          }
+
+          link.onload = resolve
+          link.onerror = reject
+
+          document.head.appendChild(link)
+        })
+
+        cssCache.set(url, promise)
+
+        return promise
+      },
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const metaThemeColor = document.querySelector('meta[name="theme-color"]')
+      const activateDarkMode = () => {
+        document.documentElement.dataset.theme = 'dark'
+        if (metaThemeColor !== null) {
+          metaThemeColor.setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.dataset.theme = 'light'
+        if (metaThemeColor !== null) {
+          metaThemeColor.setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: 'Copy Successful',
+    error: 'Copy Failed',
+    noSupport: 'Browser Not Supported'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: 'Just now',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.13.0/dist/infinitegrid.min.js',
+    buttonText: 'Load More'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Node在AI时代有哪些优势？',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 8.1.1"></head><body><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(/img/home-bg.jpg);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">mumu</span></a><a class="nav-page-title" href="/"><span class="site-name">Node在AI时代有哪些优势？</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  Back to Home</span></span></a></span><div id="menus"></div></nav><div id="post-info"><h1 class="post-title">Node在AI时代有哪些优势？</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2026-09-11T08:20:00.000Z" title="Created 2026-09-11 16:20:00">2026-09-11</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2026-09-11T03:21:59.796Z" title="Updated 2026-09-11 11:21:59">2026-09-11</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post Views:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><p>在AI时代下，NodeJS在国内的出场率变的高了一些，从claude code 到 deepseek harness 甚至是小龙虾等优秀的Agent都是使用node开发的，在AI的浪潮下，为什么Node会在这么多语言下脱引而出。</p>
+<h2 id="I-O-为什么拖慢程序"><a href="#I-O-为什么拖慢程序" class="headerlink" title="I&#x2F;O 为什么拖慢程序"></a>I&#x2F;O 为什么拖慢程序</h2><p>后端程序里，真正慢的往往不是 CPU 运算，而是 I&#x2F;O。</p>
+<p>比如：</p>
+<ul>
+<li>读文件</li>
+<li>查数据库</li>
+<li>请求第三方接口</li>
+<li>读取 socket 数据</li>
+<li>等待网络返回</li>
+</ul>
+<p>CPU 执行一段普通 JavaScript 代码可能非常快，但一次网络请求、一次磁盘读取，可能要慢很多数量级。</p>
+<hr>
+<h2 id="传统方案：一个连接一个线程"><a href="#传统方案：一个连接一个线程" class="headerlink" title="传统方案：一个连接一个线程"></a>传统方案：一个连接一个线程</h2><p>传统服务端解决阻塞 I&#x2F;O 的方式，通常是多线程。</p>
+<p>一个请求来了，分配一个线程去处理。这个线程如果要等数据库、等文件、等网络，那就让它等；其他请求再交给其他线程。</p>
+<p>这个思路很直接：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">请求 A -&gt; 线程 A</span><br><span class="line">请求 B -&gt; 线程 B</span><br><span class="line">请求 C -&gt; 线程 C</span><br></pre></td></tr></table></figure>
+
+<p>它确实能并发，但问题也很明显：</p>
+<ul>
+<li>线程数量多了之后，内存开销很高</li>
+<li>线程上下文切换有成本</li>
+<li>共享数据需要锁，容易带来复杂度</li>
+<li>很多线程其实大部分时间都在等待 I&#x2F;O</li>
+</ul>
+<p>也就是说，多线程阻塞模型能解决“一个请求卡住所有请求”的问题，但它用的是比较重的方式。</p>
+<p>Node 选择了另一条路。</p>
+<hr>
+<h2 id="Node-的核心思路：事件循环"><a href="#Node-的核心思路：事件循环" class="headerlink" title="Node 的核心思路：事件循环"></a>Node 的核心思路：事件循环</h2><p>Node 的做法是：</p>
+<ol>
+<li>JavaScript 主线程发起 I&#x2F;O 请求</li>
+<li>把真正等待 I&#x2F;O 的事情交给底层</li>
+<li>主线程继续处理别的任务</li>
+<li>I&#x2F;O 完成后，底层把结果通知给事件循环</li>
+<li>事件循环取出回调，再交给 JavaScript 执行</li>
+</ol>
+<p>这就是 Node 高并发的核心。</p>
+<img src="/2026/09/11/Node%E5%BA%95%E5%B1%82%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF%E4%B8%8E%E5%B9%B6%E5%8F%91/node-reactor-flow.svg" class="" title="Node Reactor 模式流程图">
+
+<p>这张图可以这样理解：</p>
+<ul>
+<li><strong>应用程序</strong>：你写的 JavaScript 代码</li>
+<li><strong>Node API</strong>：比如 <code>fs.readFile</code>、<code>http.createServer</code></li>
+<li><strong>libuv</strong>：Node 的底层异步 I&#x2F;O 引擎</li>
+<li><strong>事件多路分离器</strong>：底层等待 I&#x2F;O 完成的机制</li>
+<li><strong>事件队列</strong>：I&#x2F;O 完成后，回调被放到这里</li>
+<li><strong>事件循环</strong>：不断从队列取任务，让 JavaScript 执行对应回调</li>
+</ul>
+<p>这里最重要的点是：</p>
+<p><strong>等待 I&#x2F;O 的过程，不占用 JavaScript 主线程。</strong></p>
+<hr>
+<h2 id="并发压测实验"><a href="#并发压测实验" class="headerlink" title="并发压测实验"></a>并发压测实验</h2><img src="/2026/09/11/Node%E5%BA%95%E5%B1%82%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF%E4%B8%8E%E5%B9%B6%E5%8F%91/image.png" class="" title="Node Reactor 模式流程图">
+
+<p>这张图，是本地做了个压测，同时发一万个请求，服务端处理一万个请求，内存只占268MB。<br>而相比之下，对于Java来说，开一个线程，什么都不做，大概要1MB的内存，10000个线程差不多就要10G的内存。</p>
+<p>而对于AI方面来说，我们和AI的交互大部分都是在等待AI回复，一个任务持续几分钟到几十分钟不等，对于这种交互，Node确实是非常占优势</p>
+<h2 id="Node-的优势是什么"><a href="#Node-的优势是什么" class="headerlink" title="Node 的优势是什么"></a>Node 的优势是什么</h2><h3 id="1-很适合-I-O-密集型服务"><a href="#1-很适合-I-O-密集型服务" class="headerlink" title="1. 很适合 I&#x2F;O 密集型服务"></a>1. 很适合 I&#x2F;O 密集型服务</h3><p>比如：</p>
+<ul>
+<li>Web API</li>
+<li>BFF</li>
+<li>网关</li>
+<li>即时通信</li>
+<li>文件上传下载</li>
+<li>数据聚合接口</li>
+<li>需要大量网络请求的服务</li>
+</ul>
+<p>这些服务的共同点是：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">大部分时间都在等数据库、等网络、等第三方接口。</span><br></pre></td></tr></table></figure>
+<p>Node 的事件循环模型可以让主线程在等待期间继续处理其他请求。</p>
+<h3 id="2-并发成本低"><a href="#2-并发成本低" class="headerlink" title="2. 并发成本低"></a>2. 并发成本低</h3><p>传统线程模型里，请求量上来后，线程数也容易上来。</p>
+<p>Node 不需要给每个连接都创建一个业务线程，而是用事件循环统一调度回调。</p>
+<p>这让它在大量连接、大量 I&#x2F;O 等待场景下比较省资源。</p>
+<h3 id="3-避免很多共享内存锁问题"><a href="#3-避免很多共享内存锁问题" class="headerlink" title="3. 避免很多共享内存锁问题"></a>3. 避免很多共享内存锁问题</h3><p>因为 JavaScript 业务代码主要在一个线程里执行，所以很多场景下不用像多线程编程那样频繁考虑锁、竞态条件、共享内存修改。</p>
+<p>当然，这不代表 Node 没有并发问题。</p>
+<p>比如多个异步任务读写同一个状态，仍然可能产生业务层面的时序问题。</p>
+<p>但至少它避免了很多底层线程锁的复杂度。</p>
+<h3 id="4-前后端语言统一"><a href="#4-前后端语言统一" class="headerlink" title="4. 前后端语言统一"></a>4. 前后端语言统一</h3><p>这不是底层优势，但对工程很实用。</p>
+<p>前端会 JavaScript &#x2F; TypeScript 后，切到 Node 后端时，语言成本更低。</p>
+<p>同一套类型、工具链、包管理、代码风格，也更容易在团队里复用。</p>
+<hr>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>Author: </span><span class="post-copyright-info"><a href="http://example.com">John Doe</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>Link: </span><span class="post-copyright-info"><a href="http://example.com/2026/09/11/Node%E5%BA%95%E5%B1%82%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF%E4%B8%8E%E5%B9%B6%E5%8F%91/">http://example.com/2026/09/11/Node%E5%BA%95%E5%B1%82%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF%E4%B8%8E%E5%B9%B6%E5%8F%91/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>Copyright Notice: </span><span class="post-copyright-info">All articles on this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless otherwise stated.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E5%90%8E%E7%AB%AF/">后端</a><a class="post-meta__tags" href="/tags/Node-js/">Node.js</a><a class="post-meta__tags" href="/tags/JavaScript/">JavaScript</a><a class="post-meta__tags" href="/tags/%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF/">事件循环</a></div><div class="post-share"><div class="social-share" data-image="/img/butterfly-icon.jpg" data-sites="facebook,x,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related full-width" href="/2026/08/23/Docker%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B02/" title="Docker学习笔记2"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">Next</div><div class="info-item-2">Docker学习笔记2</div></div><div class="info-2"><div class="info-item-1">好的！我来帮你把这次前端 CI&#x2F;CD 部署的完整过程整理成一篇技术博客。这篇博客适合分享给团队或在社区发布。  从零搭建前端 CI&#x2F;CD 流水线：GitLab + Docker 实战指南前言在传统的前端开发流程中，我们通常需要手动执行 npm run build，然后通过 FTP 或 Scp 将构建产物上传到服务器。这种方式不仅效率低下，还容易出错。 本文将带你从零开始，在自建 GitLab 服务器上配置一套完整的前端 CI&#x2F;CD 流水线，实现代码推送 → 自动构建 → Docker 镜像打包 → 自动部署的全流程自动化。  最终效果：当你执行 git push origin main 后，只需等待几分钟，刷新浏览器就能看到最新的页面。   一、整体架构12345678flowchart LR    A[开发者推送代码] --&gt; B[GitLab 触发流水线]    B --&gt; C[GitLab Runner 拉取代码]    C --&gt; D[安装依赖 &amp; 构建项目]    D --&gt; E[生成 dist/ 产物]  ...</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>Related Articles</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2026/08/13/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" title="Java 学习笔记1"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-08-13</div><div class="info-item-2">Java 学习笔记1</div></div><div class="info-2"><div class="info-item-1">最近准备学习后端，那么从前端转向后端，从语言层面到思维层面到底有哪些差异呢？所以这篇博客先作为一个学习入口，记录我从javascript到java的过程  第一阶段：Java 面向对象javaScript和Java其实是有很多相似的，特别是从es6以后。 TypeScript 和 Java 都支持面向对象，但它们的语法虽然像，背后的类型系统和使用习惯不太一样。 下面按这几个概念分别看： 1类、对象、构造函数、封装、继承、多态、接口、抽象类、泛型   1. 类：class类是对象的模板，用来描述对象有哪些属性和方法。 相同点： TS 和 Java 都用 class 定义类。 TypeScript： 1234567891011class User &#123;  name: string;  constructor(name: string) &#123;    this.name = name;  &#125;  sayHello(): string &#123;    return `Hello, $&#123;this.name&#125;`;  &#125;&#125;  J...</div></div></div></a></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/butterfly-icon.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">John Doe</div><div class="author-info-description"></div><div class="site-data"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">9</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">14</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Contents</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#I-O-%E4%B8%BA%E4%BB%80%E4%B9%88%E6%8B%96%E6%85%A2%E7%A8%8B%E5%BA%8F"><span class="toc-number">1.</span> <span class="toc-text">I&#x2F;O 为什么拖慢程序</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BC%A0%E7%BB%9F%E6%96%B9%E6%A1%88%EF%BC%9A%E4%B8%80%E4%B8%AA%E8%BF%9E%E6%8E%A5%E4%B8%80%E4%B8%AA%E7%BA%BF%E7%A8%8B"><span class="toc-number">2.</span> <span class="toc-text">传统方案：一个连接一个线程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Node-%E7%9A%84%E6%A0%B8%E5%BF%83%E6%80%9D%E8%B7%AF%EF%BC%9A%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF"><span class="toc-number">3.</span> <span class="toc-text">Node 的核心思路：事件循环</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B9%B6%E5%8F%91%E5%8E%8B%E6%B5%8B%E5%AE%9E%E9%AA%8C"><span class="toc-number">4.</span> <span class="toc-text">并发压测实验</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Node-%E7%9A%84%E4%BC%98%E5%8A%BF%E6%98%AF%E4%BB%80%E4%B9%88"><span class="toc-number">5.</span> <span class="toc-text">Node 的优势是什么</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%BE%88%E9%80%82%E5%90%88-I-O-%E5%AF%86%E9%9B%86%E5%9E%8B%E6%9C%8D%E5%8A%A1"><span class="toc-number">5.1.</span> <span class="toc-text">1. 很适合 I&#x2F;O 密集型服务</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E5%B9%B6%E5%8F%91%E6%88%90%E6%9C%AC%E4%BD%8E"><span class="toc-number">5.2.</span> <span class="toc-text">2. 并发成本低</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E9%81%BF%E5%85%8D%E5%BE%88%E5%A4%9A%E5%85%B1%E4%BA%AB%E5%86%85%E5%AD%98%E9%94%81%E9%97%AE%E9%A2%98"><span class="toc-number">5.3.</span> <span class="toc-text">3. 避免很多共享内存锁问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E5%89%8D%E5%90%8E%E7%AB%AF%E8%AF%AD%E8%A8%80%E7%BB%9F%E4%B8%80"><span class="toc-number">5.4.</span> <span class="toc-text">4. 前后端语言统一</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Posts</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/09/11/Node%E5%BA%95%E5%B1%82%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF%E4%B8%8E%E5%B9%B6%E5%8F%91/" title="Node在AI时代有哪些优势？">Node在AI时代有哪些优势？</a><time datetime="2026-09-11T08:20:00.000Z" title="Created 2026-09-11 16:20:00">2026-09-11</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/08/23/Docker%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B02/" title="Docker学习笔记2">Docker学习笔记2</a><time datetime="2026-08-23T10:39:33.000Z" title="Created 2026-08-23 18:39:33">2026-08-23</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/08/23/Docker%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" title="Docker学习笔记">Docker学习笔记</a><time datetime="2026-08-23T04:02:19.000Z" title="Created 2026-08-23 12:02:19">2026-08-23</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/08/13/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" title="Java 学习笔记1">Java 学习笔记1</a><time datetime="2026-08-13T07:02:06.000Z" title="Created 2026-08-13 15:02:06">2026-08-13</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/07/24/%E7%8C%9B%E7%94%B7%E7%B2%89%E6%BC%AB%E5%89%A7%E5%86%85%E5%AE%B9%E7%AB%99%E5%AE%9E%E6%88%98/" title="猛男粉漫剧内容站实战">猛男粉漫剧内容站实战</a><time datetime="2026-07-24T04:06:55.000Z" title="Created 2026-07-24 12:06:55">2026-07-24</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 - 2026 By John Doe</span><span class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 8.1.1</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.7.0</a></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Reading Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Toggle Between Light and Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle Between Single-column and Double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Settings"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table of Contents"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="Back to Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.7.0"></script><script src="/js/main.js?v=5.7.0"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 720" role="img" aria-labelledby="title desc">
+  <title id="title">Node Reactor 模式流程图</title>
+  <desc id="desc">展示 JavaScript 应用、Node API、libuv、事件多路分离器、事件队列和事件循环之间的请求与回调流转。</desc>
+  <defs>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <path d="M2,2 L10,6 L2,10 Z" fill="#2563eb"/>
+    </marker>
+    <marker id="arrow-green" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <path d="M2,2 L10,6 L2,10 Z" fill="#059669"/>
+    </marker>
+    <style>
+      .bg{fill:#f8fafc}
+      .title{font:700 32px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;fill:#0f172a}
+      .sub{font:400 17px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;fill:#475569}
+      .box{fill:#fff;stroke:#cbd5e1;stroke-width:2;rx:18}
+      .box-blue{fill:#eff6ff;stroke:#60a5fa;stroke-width:2;rx:18}
+      .box-green{fill:#ecfdf5;stroke:#34d399;stroke-width:2;rx:18}
+      .box-yellow{fill:#fffbeb;stroke:#f59e0b;stroke-width:2;rx:18}
+      .box-purple{fill:#f5f3ff;stroke:#8b5cf6;stroke-width:2;rx:18}
+      .label{font:700 22px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;fill:#0f172a}
+      .small{font:400 16px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;fill:#334155}
+      .num{font:700 18px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;fill:#fff}
+      .circle{fill:#2563eb}
+      .line{fill:none;stroke:#2563eb;stroke-width:3;marker-end:url(#arrow)}
+      .line-green{fill:none;stroke:#059669;stroke-width:3;marker-end:url(#arrow-green)}
+      .dash{fill:none;stroke:#94a3b8;stroke-width:2;stroke-dasharray:8 8}
+    </style>
+  </defs>
+  <rect class="bg" width="1200" height="720"/>
+  <text x="60" y="70" class="title">Node 底层并发模型：Reactor + 事件循环</text>
+  <text x="60" y="104" class="sub">主线程不等待 I/O，底层完成后把事件交回 JavaScript 回调</text>
+
+  <rect x="65" y="170" width="230" height="110" class="box-blue"/>
+  <text x="180" y="212" text-anchor="middle" class="label">JavaScript 应用</text>
+  <text x="180" y="244" text-anchor="middle" class="small">发起 fs/http/db 操作</text>
+
+  <rect x="400" y="170" width="230" height="110" class="box"/>
+  <text x="515" y="212" text-anchor="middle" class="label">Node API</text>
+  <text x="515" y="244" text-anchor="middle" class="small">注册 callback / Promise</text>
+
+  <rect x="760" y="150" width="300" height="150" class="box-green"/>
+  <text x="910" y="195" text-anchor="middle" class="label">libuv</text>
+  <text x="910" y="228" text-anchor="middle" class="small">事件循环 + 异步 I/O</text>
+  <text x="910" y="258" text-anchor="middle" class="small">必要时使用线程池</text>
+
+  <rect x="90" y="420" width="290" height="135" class="box-yellow"/>
+  <text x="235" y="466" text-anchor="middle" class="label">事件多路分离器</text>
+  <text x="235" y="499" text-anchor="middle" class="small">epoll / kqueue / IOCP</text>
+  <text x="235" y="529" text-anchor="middle" class="small">等待 I/O 就绪通知</text>
+
+  <rect x="470" y="420" width="220" height="135" class="box-purple"/>
+  <text x="580" y="466" text-anchor="middle" class="label">事件队列</text>
+  <text x="580" y="499" text-anchor="middle" class="small">保存已完成事件</text>
+  <text x="580" y="529" text-anchor="middle" class="small">附带对应 handler</text>
+
+  <rect x="810" y="420" width="260" height="135" class="box-blue"/>
+  <text x="940" y="466" text-anchor="middle" class="label">事件循环</text>
+  <text x="940" y="499" text-anchor="middle" class="small">取出事件</text>
+  <text x="940" y="529" text-anchor="middle" class="small">执行 JS 回调</text>
+
+  <path class="line" d="M295 225 C330 225, 360 225, 398 225"/>
+  <path class="line" d="M630 225 C680 225, 710 225, 758 225"/>
+  <path class="line" d="M895 302 C830 365, 500 370, 380 450"/>
+  <path class="line-green" d="M380 488 C420 488, 430 488, 468 488"/>
+  <path class="line-green" d="M690 488 C735 488, 760 488, 808 488"/>
+  <path class="line" d="M940 420 C940 350, 720 335, 630 257"/>
+  <path class="dash" d="M940 555 C910 645, 150 650, 180 280"/>
+
+  <circle cx="335" cy="225" r="16" class="circle"/><text x="335" y="232" text-anchor="middle" class="num">1</text>
+  <circle cx="695" cy="225" r="16" class="circle"/><text x="695" y="232" text-anchor="middle" class="num">2</text>
+  <circle cx="620" cy="370" r="16" class="circle"/><text x="620" y="377" text-anchor="middle" class="num">3</text>
+  <circle cx="430" cy="488" r="16" class="circle"/><text x="430" y="495" text-anchor="middle" class="num">4</text>
+  <circle cx="750" cy="488" r="16" class="circle"/><text x="750" y="495" text-anchor="middle" class="num">5</text>
+  <circle cx="760" cy="342" r="16" class="circle"/><text x="760" y="349" text-anchor="middle" class="num">6</text>
+
+  <text x="60" y="628" class="small">1 发起异步调用　2 交给 libuv　3 底层等待 I/O　4 完成后生成事件　5 事件循环取回调　6 执行 JS handler</text>
+</svg>
