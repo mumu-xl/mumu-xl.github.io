@@ -11,8 +11,20 @@
 
     const script = document.createElement('script')
     script.src = src
-    script.onload = resolve
-    script.onerror = reject
+    const timeout = window.setTimeout(() => {
+      script.remove()
+      reject(new Error(`Timed out loading ${src}`))
+    }, 5000)
+
+    script.onload = () => {
+      window.clearTimeout(timeout)
+      resolve()
+    }
+    script.onerror = () => {
+      window.clearTimeout(timeout)
+      script.remove()
+      reject(new Error(`Failed to load ${src}`))
+    }
     document.head.appendChild(script)
   })
 
