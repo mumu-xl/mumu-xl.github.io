@@ -205,7 +205,7 @@
   isHighlightShrink: false,
   isToc: true,
   pageType: 'post'
-}</script><meta name="generator" content="Hexo 8.1.1"></head><body><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(/img/home-bg.jpg);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">mumu</span></a><a class="nav-page-title" href="/"><span class="site-name">OpenSpec+deepseek 漫剧内容站实战总结</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  Back to Home</span></span></a></span><div id="menus"></div></nav><div id="post-info"><h1 class="post-title">OpenSpec+deepseek 漫剧内容站实战总结</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2026-06-04T16:00:00.000Z" title="Created 2026-06-05 00:00:00">2026-06-05</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2026-06-05T06:27:33.147Z" title="Updated 2026-06-05 14:27:33">2026-06-05</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post Views:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><p>用 AI 写代码的人，应该都有过这种体验：一句话需求丢过去，AI 一顿猛写，方向跑偏，你得来回拉扯好几轮才能把代码掰回来。</p>
+}</script><script src="https://cdn.jsdelivr.net/npm/mermaid@11.16.0/dist/mermaid.min.js"></script><script>window.loadMermaid = true;</script><meta name="generator" content="Hexo 8.1.1"></head><body><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(/img/home-bg.jpg);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">mumu</span></a><a class="nav-page-title" href="/"><span class="site-name">OpenSpec+deepseek 漫剧内容站实战总结</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  Back to Home</span></span></a></span><div id="menus"></div></nav><div id="post-info"><h1 class="post-title">OpenSpec+deepseek 漫剧内容站实战总结</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2026-06-04T16:00:00.000Z" title="Created 2026-06-05 00:00:00">2026-06-05</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2026-06-05T06:27:33.147Z" title="Updated 2026-06-05 14:27:33">2026-06-05</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post Views:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><p>用 AI 写代码的人，应该都有过这种体验：一句话需求丢过去，AI 一顿猛写，方向跑偏，你得来回拉扯好几轮才能把代码掰回来。</p>
 <p>更要命的是，同样一句话，给 Claude 是一个结果，给 DeepSeek 又是另一个结果，而且质量差距不小。久而久之就变成了”只用最强模型”——成本高，速度慢。</p>
 <p>我现在的解法是：<strong>把 OpenSpec 作为核心锚点，配合 DeepSeek + Claude Code + CC Switch 打配合。</strong> 这篇文章主要讲 OpenSpec——它是什么、怎么用、生成什么文件、有哪些命令，以及<strong>为什么加上它之后，连国产大模型也能写出很标准的代码</strong>。</p>
 <hr>
@@ -446,4 +446,366 @@ AI 会对着 spec.md 里的每条约束和边界情况，检查代码是否完�
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">npm install -g @fission-ai/openspec@latest</span><br><span class="line"><span class="built_in">cd</span> your-project</span><br><span class="line">openspec init</span><br></pre></td></tr></table></figure>
 
 <p>然后找个新功能，跑一遍 <code>/opsx:explore → /opsx:propose → /opsx:apply → /opsx:archive</code>，感受一下规范驱动的流程和以前直接对话的差别。</p>
-</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>Author: </span><span class="post-copyright-info"><a href="http://example.com">John Doe</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>Link: </span><span class="post-copyright-info"><a href="http://example.com/2026/06/05/cc-switch-deepseek-claude-code-openspec/">http://example.com/2026/06/05/cc-switch-deepseek-claude-code-openspec/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>Copyright Notice: </span><span class="post-copyright-info">All articles on this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless otherwise stated.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/AI/">AI</a><a class="post-meta__tags" href="/tags/Claude-Code/">Claude Code</a><a class="post-meta__tags" href="/tags/DeepSeek/">DeepSeek</a><a class="post-meta__tags" href="/tags/OpenSpec/">OpenSpec</a><a class="post-meta__tags" href="/tags/SDD/">SDD</a></div><div class="post-share"><div class="social-share" data-image="/img/butterfly-icon.jpg" data-sites="facebook,x,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2026/07/03/%E5%AF%B9Rag%E7%9A%84%E6%8E%A2%E7%B4%A2/" title="对RAG的探索：从知识库治理到高效召回"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">Previous</div><div class="info-item-2">对RAG的探索：从知识库治理到高效召回</div></div><div class="info-2"><div class="info-item-1">Agent是什么？Agent &#x3D; RAG + LLM + Tools 对于我们大模型来说，从它被训练出来，他的知识就已经固化了，所以对于它没有的知识或者有些我们自己整理的数据就需要搭建一个知识库来通过RAG进行检索，召回丢给大模型让他整理回答，所以RAG的重要性不言而喻。 所以 RAG 真正难的地方，不是“怎么接一个向量库”，而是：如何让知识以更容易被检索、被判断、被更新的方式进入系统。 这篇文章结合 RAG 高级技术与调优的内容，整理一下我现在对 RAG 的理解。  RAG 的三个基本步骤RAG 可以拆成三个阶段：  Indexing：如何把知识存起来 Retrieval：如何从大量知识中找到一小部分有用内容 Generation：如何结合用户问题和检索结果生成答案   第一层：先把知识库处理好1. 为知识切片生成问题首先对于我们的数据，格式各种各样，如 text，pdf，office等等，我这边采用的操作读取所有的数据，然后转化成markdown格式，因为大模型天然对文本类型支持性更强。 接下来就是对我们的markdown数据进行重组变成chunk，chunk的结构...</div></div></div></a><a class="pagination-related" href="/2026/05/15/V8/" title="浏览器执行原理和性能提升"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">Next</div><div class="info-item-2">浏览器执行原理和性能提升</div></div><div class="info-2"><div class="info-item-1"> 浏览器是如何下载js文件的呢？首先在浏览器中输入域名，然后这个域名将转化服务器的IP地址，这个IP地址将返回一个文件，就是图中的index.html文件，这个时候浏览器开始解析这个网页，解析到link标签就下载css文件，解析到script标签就下载js文件。 浏览器的渲染过程  浏览器将html，css，js文件下载下来后就开始解析，这个时候由浏览器内核中的HtmlParse模块将HTML标签编译成DOMTree，这个时候可以利用js进行DOM操作将HTML元素插入到DOMTree中，而浏览器则是通过浏览器引擎来解析js的，我们在下面的内容将会重点将浏览器V8引擎。   DOMTtree生成以后将会开始解析css文件，通过cssParse模块将css解析为StyleRulesTree，接下来DOMTree和StyleRulesTree将会结合形成RenderTree。    RenderTree生成以后通过Layout引擎根据浏览器大小来生成新的renderTree，然后绘制出来，浏览器开始展示。由于有些html标签定位不同，这个时候浏览器大小不同，元素位置就不同，layou...</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>Related Articles</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2026/07/03/%E5%AF%B9Rag%E7%9A%84%E6%8E%A2%E7%B4%A2/" title="对RAG的探索：从知识库治理到高效召回"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-07-03</div><div class="info-item-2">对RAG的探索：从知识库治理到高效召回</div></div><div class="info-2"><div class="info-item-1">Agent是什么？Agent &#x3D; RAG + LLM + Tools 对于我们大模型来说，从它被训练出来，他的知识就已经固化了，所以对于它没有的知识或者有些我们自己整理的数据就需要搭建一个知识库来通过RAG进行检索，召回丢给大模型让他整理回答，所以RAG的重要性不言而喻。 所以 RAG 真正难的地方，不是“怎么接一个向量库”，而是：如何让知识以更容易被检索、被判断、被更新的方式进入系统。 这篇文章结合 RAG 高级技术与调优的内容，整理一下我现在对 RAG 的理解。  RAG 的三个基本步骤RAG 可以拆成三个阶段：  Indexing：如何把知识存起来 Retrieval：如何从大量知识中找到一小部分有用内容 Generation：如何结合用户问题和检索结果生成答案   第一层：先把知识库处理好1. 为知识切片生成问题首先对于我们的数据，格式各种各样，如 text，pdf，office等等，我这边采用的操作读取所有的数据，然后转化成markdown格式，因为大模型天然对文本类型支持性更强。 接下来就是对我们的markdown数据进行重组变成chunk，chunk的结构...</div></div></div></a></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/butterfly-icon.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">John Doe</div><div class="author-info-description"></div><div class="site-data"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">9</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">14</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Contents</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%88%E7%AE%80%E5%8D%95%E8%AE%A4%E7%9F%A5%E4%B8%80%E4%B8%8B%E5%85%B6%E4%BB%96%E4%B8%89%E4%B8%AA%E5%B7%A5%E5%85%B7"><span class="toc-number">1.</span> <span class="toc-text">先简单认知一下其他三个工具</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#OpenSpec-%E6%98%AF%E4%BB%80%E4%B9%88"><span class="toc-number">2.</span> <span class="toc-text">OpenSpec 是什么</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#OpenSpec-%E7%94%9F%E6%88%90%E4%BA%86%E4%BB%80%E4%B9%88%EF%BC%9A%E7%9B%AE%E5%BD%95%E4%B8%8E%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84"><span class="toc-number">3.</span> <span class="toc-text">OpenSpec 生成了什么：目录与文件结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#OpenSpec-%E6%9C%89%E5%93%AA%E4%BA%9B%E5%91%BD%E4%BB%A4"><span class="toc-number">4.</span> <span class="toc-text">OpenSpec 有哪些命令</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%88%E7%AB%AF-CLI-%E5%91%BD%E4%BB%A4"><span class="toc-number">4.1.</span> <span class="toc-text">终端 CLI 命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#AI-%E6%96%9C%E6%9D%A0%E5%91%BD%E4%BB%A4%EF%BC%88%E5%9C%A8-Claude-Code-%E7%AD%89%E5%B7%A5%E5%85%B7%E9%87%8C%E7%9B%B4%E6%8E%A5%E4%BD%BF%E7%94%A8%EF%BC%89"><span class="toc-number">4.2.</span> <span class="toc-text">AI 斜杠命令（在 Claude Code 等工具里直接使用）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#OpenSpec-%E7%9A%84%E5%AE%8C%E6%95%B4%E5%B7%A5%E4%BD%9C%E6%B5%81"><span class="toc-number">5.</span> <span class="toc-text">OpenSpec 的完整工作流</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%94%A8%E4%B8%80%E4%B8%AA%E7%9C%9F%E5%AE%9E%E4%BE%8B%E5%AD%90%E8%B5%B0%E4%B8%80%E9%81%8D%E5%85%A8%E6%B5%81%E7%A8%8B"><span class="toc-number">6.</span> <span class="toc-text">用一个真实例子走一遍全流程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E6%AD%A5%EF%BC%9A%E6%8E%A2%E7%B4%A2"><span class="toc-number">6.1.</span> <span class="toc-text">第一步：探索</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E6%AD%A5%EF%BC%9A%E6%8F%90%E6%A1%88"><span class="toc-number">6.2.</span> <span class="toc-text">第二步：提案</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%B8%89%E6%AD%A5%EF%BC%9A%E4%BA%BA%E5%B7%A5%E5%AE%A1%E6%9F%A5"><span class="toc-number">6.3.</span> <span class="toc-text">第三步：人工审查</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E5%9B%9B%E6%AD%A5%EF%BC%9A%E5%AE%9E%E6%96%BD"><span class="toc-number">6.4.</span> <span class="toc-text">第四步：实施</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%BA%94%E6%AD%A5%EF%BC%9A%E5%BD%92%E6%A1%A3"><span class="toc-number">6.5.</span> <span class="toc-text">第五步：归档</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88-OpenSpec-%E8%83%BD%E8%AE%A9%E5%9B%BD%E4%BA%A7%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%86%99%E5%87%BA%E6%A0%87%E5%87%86%E5%8C%96%E4%BB%A3%E7%A0%81"><span class="toc-number">7.</span> <span class="toc-text">为什么 OpenSpec 能让国产大模型写出标准化代码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">8.</span> <span class="toc-text">总结</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Posts</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/09/11/Node%E5%BA%95%E5%B1%82%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF%E4%B8%8E%E5%B9%B6%E5%8F%91/" title="Node在AI时代有哪些优势？">Node在AI时代有哪些优势？</a><time datetime="2026-09-11T08:20:00.000Z" title="Created 2026-09-11 16:20:00">2026-09-11</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/08/23/Docker%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B02/" title="Docker学习笔记2">Docker学习笔记2</a><time datetime="2026-08-23T10:39:33.000Z" title="Created 2026-08-23 18:39:33">2026-08-23</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/08/23/Docker%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" title="Docker学习笔记">Docker学习笔记</a><time datetime="2026-08-23T04:02:19.000Z" title="Created 2026-08-23 12:02:19">2026-08-23</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/08/13/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" title="Java 学习笔记1">Java 学习笔记1</a><time datetime="2026-08-13T07:02:06.000Z" title="Created 2026-08-13 15:02:06">2026-08-13</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/07/24/%E7%8C%9B%E7%94%B7%E7%B2%89%E6%BC%AB%E5%89%A7%E5%86%85%E5%AE%B9%E7%AB%99%E5%AE%9E%E6%88%98/" title="猛男粉漫剧内容站实战">猛男粉漫剧内容站实战</a><time datetime="2026-07-24T04:06:55.000Z" title="Created 2026-07-24 12:06:55">2026-07-24</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 - 2026 By John Doe</span><span class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 8.1.1</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.7.0</a></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Reading Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Toggle Between Light and Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle Between Single-column and Double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Settings"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table of Contents"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="Back to Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.7.0"></script><script src="/js/main.js?v=5.7.0"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>Author: </span><span class="post-copyright-info"><a href="http://example.com">John Doe</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>Link: </span><span class="post-copyright-info"><a href="http://example.com/2026/06/05/cc-switch-deepseek-claude-code-openspec/">http://example.com/2026/06/05/cc-switch-deepseek-claude-code-openspec/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>Copyright Notice: </span><span class="post-copyright-info">All articles on this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless otherwise stated.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/AI/">AI</a><a class="post-meta__tags" href="/tags/Claude-Code/">Claude Code</a><a class="post-meta__tags" href="/tags/DeepSeek/">DeepSeek</a><a class="post-meta__tags" href="/tags/OpenSpec/">OpenSpec</a><a class="post-meta__tags" href="/tags/SDD/">SDD</a></div><div class="post-share"><div class="social-share" data-image="/img/butterfly-icon.jpg" data-sites="facebook,x,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2026/07/03/%E5%AF%B9Rag%E7%9A%84%E6%8E%A2%E7%B4%A2/" title="对RAG的探索：从知识库治理到高效召回"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">Previous</div><div class="info-item-2">对RAG的探索：从知识库治理到高效召回</div></div><div class="info-2"><div class="info-item-1">Agent是什么？Agent &#x3D; RAG + LLM + Tools 对于我们大模型来说，从它被训练出来，他的知识就已经固化了，所以对于它没有的知识或者有些我们自己整理的数据就需要搭建一个知识库来通过RAG进行检索，召回丢给大模型让他整理回答，所以RAG的重要性不言而喻。 所以 RAG 真正难的地方，不是“怎么接一个向量库”，而是：如何让知识以更容易被检索、被判断、被更新的方式进入系统。 这篇文章结合 RAG 高级技术与调优的内容，整理一下我现在对 RAG 的理解。  RAG 的三个基本步骤RAG 可以拆成三个阶段：  Indexing：如何把知识存起来 Retrieval：如何从大量知识中找到一小部分有用内容 Generation：如何结合用户问题和检索结果生成答案   第一层：先把知识库处理好1. 为知识切片生成问题首先对于我们的数据，格式各种各样，如 text，pdf，office等等，我这边采用的操作读取所有的数据，然后转化成markdown格式，因为大模型天然对文本类型支持性更强。 接下来就是对我们的markdown数据进行重组变成chunk，chunk的结构...</div></div></div></a><a class="pagination-related" href="/2026/05/15/V8/" title="浏览器执行原理和性能提升"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">Next</div><div class="info-item-2">浏览器执行原理和性能提升</div></div><div class="info-2"><div class="info-item-1"> 浏览器是如何下载js文件的呢？首先在浏览器中输入域名，然后这个域名将转化服务器的IP地址，这个IP地址将返回一个文件，就是图中的index.html文件，这个时候浏览器开始解析这个网页，解析到link标签就下载css文件，解析到script标签就下载js文件。 浏览器的渲染过程  浏览器将html，css，js文件下载下来后就开始解析，这个时候由浏览器内核中的HtmlParse模块将HTML标签编译成DOMTree，这个时候可以利用js进行DOM操作将HTML元素插入到DOMTree中，而浏览器则是通过浏览器引擎来解析js的，我们在下面的内容将会重点将浏览器V8引擎。   DOMTtree生成以后将会开始解析css文件，通过cssParse模块将css解析为StyleRulesTree，接下来DOMTree和StyleRulesTree将会结合形成RenderTree。    RenderTree生成以后通过Layout引擎根据浏览器大小来生成新的renderTree，然后绘制出来，浏览器开始展示。由于有些html标签定位不同，这个时候浏览器大小不同，元素位置就不同，layou...</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>Related Articles</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2026/10/16/aurora-app-jev-intent-routing/" title="从 LLM 分类到 Jev：用“智能 if”重做意图识别与路由分发"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-10-16</div><div class="info-item-2">从 LLM 分类到 Jev：用“智能 if”重做意图识别与路由分发</div></div><div class="info-2"><div class="info-item-1">从传统 LLM 到 Jev：更快的意图识别与路由分发AI 收到用户消息后，通常要先判断用户想做什么，再把任务交给对应流程。 123“帮我查明天的天气” → weather“把这段文字缩短”   → edit“继续刚才的任务”   → continue  传统做法是让 LLM 生成分类 JSON。Jev 的做法更直接：不生成文字，只返回选择和概率。 一、传统意图识别是怎么做的%%&#123;init: &#123;&quot;theme&quot;:&quot;base&quot;,&quot;themeVariables&quot;:&#123;&quot;fontFamily&quot;:&quot;Arial&quot;,&quot;primaryColor&quot;:&quot;#E8F1FF&quot;,&quot;primaryTextColor&quot;:&quot;#172033&quot;,&quot;primaryBorderColor&quot;:&quot;#5B8DEF&quot;,&quot;lineColor&quot;:&quot;#7B879E...</div></div></div></a><a class="pagination-related" href="/2026/07/03/%E5%AF%B9Rag%E7%9A%84%E6%8E%A2%E7%B4%A2/" title="对RAG的探索：从知识库治理到高效召回"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-07-03</div><div class="info-item-2">对RAG的探索：从知识库治理到高效召回</div></div><div class="info-2"><div class="info-item-1">Agent是什么？Agent &#x3D; RAG + LLM + Tools 对于我们大模型来说，从它被训练出来，他的知识就已经固化了，所以对于它没有的知识或者有些我们自己整理的数据就需要搭建一个知识库来通过RAG进行检索，召回丢给大模型让他整理回答，所以RAG的重要性不言而喻。 所以 RAG 真正难的地方，不是“怎么接一个向量库”，而是：如何让知识以更容易被检索、被判断、被更新的方式进入系统。 这篇文章结合 RAG 高级技术与调优的内容，整理一下我现在对 RAG 的理解。  RAG 的三个基本步骤RAG 可以拆成三个阶段：  Indexing：如何把知识存起来 Retrieval：如何从大量知识中找到一小部分有用内容 Generation：如何结合用户问题和检索结果生成答案   第一层：先把知识库处理好1. 为知识切片生成问题首先对于我们的数据，格式各种各样，如 text，pdf，office等等，我这边采用的操作读取所有的数据，然后转化成markdown格式，因为大模型天然对文本类型支持性更强。 接下来就是对我们的markdown数据进行重组变成chunk，chunk的结构...</div></div></div></a></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/butterfly-icon.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">John Doe</div><div class="author-info-description"></div><div class="site-data"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">10</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">18</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">1</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Contents</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%88%E7%AE%80%E5%8D%95%E8%AE%A4%E7%9F%A5%E4%B8%80%E4%B8%8B%E5%85%B6%E4%BB%96%E4%B8%89%E4%B8%AA%E5%B7%A5%E5%85%B7"><span class="toc-number">1.</span> <span class="toc-text">先简单认知一下其他三个工具</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#OpenSpec-%E6%98%AF%E4%BB%80%E4%B9%88"><span class="toc-number">2.</span> <span class="toc-text">OpenSpec 是什么</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#OpenSpec-%E7%94%9F%E6%88%90%E4%BA%86%E4%BB%80%E4%B9%88%EF%BC%9A%E7%9B%AE%E5%BD%95%E4%B8%8E%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84"><span class="toc-number">3.</span> <span class="toc-text">OpenSpec 生成了什么：目录与文件结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#OpenSpec-%E6%9C%89%E5%93%AA%E4%BA%9B%E5%91%BD%E4%BB%A4"><span class="toc-number">4.</span> <span class="toc-text">OpenSpec 有哪些命令</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%88%E7%AB%AF-CLI-%E5%91%BD%E4%BB%A4"><span class="toc-number">4.1.</span> <span class="toc-text">终端 CLI 命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#AI-%E6%96%9C%E6%9D%A0%E5%91%BD%E4%BB%A4%EF%BC%88%E5%9C%A8-Claude-Code-%E7%AD%89%E5%B7%A5%E5%85%B7%E9%87%8C%E7%9B%B4%E6%8E%A5%E4%BD%BF%E7%94%A8%EF%BC%89"><span class="toc-number">4.2.</span> <span class="toc-text">AI 斜杠命令（在 Claude Code 等工具里直接使用）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#OpenSpec-%E7%9A%84%E5%AE%8C%E6%95%B4%E5%B7%A5%E4%BD%9C%E6%B5%81"><span class="toc-number">5.</span> <span class="toc-text">OpenSpec 的完整工作流</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%94%A8%E4%B8%80%E4%B8%AA%E7%9C%9F%E5%AE%9E%E4%BE%8B%E5%AD%90%E8%B5%B0%E4%B8%80%E9%81%8D%E5%85%A8%E6%B5%81%E7%A8%8B"><span class="toc-number">6.</span> <span class="toc-text">用一个真实例子走一遍全流程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E6%AD%A5%EF%BC%9A%E6%8E%A2%E7%B4%A2"><span class="toc-number">6.1.</span> <span class="toc-text">第一步：探索</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E6%AD%A5%EF%BC%9A%E6%8F%90%E6%A1%88"><span class="toc-number">6.2.</span> <span class="toc-text">第二步：提案</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%B8%89%E6%AD%A5%EF%BC%9A%E4%BA%BA%E5%B7%A5%E5%AE%A1%E6%9F%A5"><span class="toc-number">6.3.</span> <span class="toc-text">第三步：人工审查</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E5%9B%9B%E6%AD%A5%EF%BC%9A%E5%AE%9E%E6%96%BD"><span class="toc-number">6.4.</span> <span class="toc-text">第四步：实施</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%BA%94%E6%AD%A5%EF%BC%9A%E5%BD%92%E6%A1%A3"><span class="toc-number">6.5.</span> <span class="toc-text">第五步：归档</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88-OpenSpec-%E8%83%BD%E8%AE%A9%E5%9B%BD%E4%BA%A7%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%86%99%E5%87%BA%E6%A0%87%E5%87%86%E5%8C%96%E4%BB%A3%E7%A0%81"><span class="toc-number">7.</span> <span class="toc-text">为什么 OpenSpec 能让国产大模型写出标准化代码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">8.</span> <span class="toc-text">总结</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Posts</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/10/16/aurora-app-jev-intent-routing/" title="从 LLM 分类到 Jev：用“智能 if”重做意图识别与路由分发">从 LLM 分类到 Jev：用“智能 if”重做意图识别与路由分发</a><time datetime="2026-10-15T16:00:00.000Z" title="Created 2026-10-16 00:00:00">2026-10-16</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/09/11/Node%E5%BA%95%E5%B1%82%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF%E4%B8%8E%E5%B9%B6%E5%8F%91/" title="Node在AI时代有哪些优势？">Node在AI时代有哪些优势？</a><time datetime="2026-09-11T08:20:00.000Z" title="Created 2026-09-11 16:20:00">2026-09-11</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/08/23/Docker%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B02/" title="Docker学习笔记2">Docker学习笔记2</a><time datetime="2026-08-23T10:39:33.000Z" title="Created 2026-08-23 18:39:33">2026-08-23</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/08/23/Docker%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" title="Docker学习笔记">Docker学习笔记</a><time datetime="2026-08-23T04:02:19.000Z" title="Created 2026-08-23 12:02:19">2026-08-23</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/08/13/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" title="Java 学习笔记1">Java 学习笔记1</a><time datetime="2026-08-13T07:02:06.000Z" title="Created 2026-08-13 15:02:06">2026-08-13</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 - 2026 By John Doe</span><span class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 8.1.1</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.7.0</a></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Reading Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Toggle Between Light and Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle Between Single-column and Double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Settings"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table of Contents"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="Back to Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.7.0"></script><script src="/js/main.js?v=5.7.0"></script><div class="js-pjax"><script>(() => {
+  const parseViewBox = viewBox => {
+    if (!viewBox) return null
+    const parts = viewBox.trim().split(/[\s,]+/).map(n => Number(n))
+    if (parts.length !== 4 || parts.some(n => Number.isNaN(n))) return null
+    return parts
+  }
+
+  const getSvgViewBox = svg => {
+    const attr = parseViewBox(svg.getAttribute('viewBox'))
+    if (attr) return attr
+
+    // Fallback: use bbox to build a viewBox
+    try {
+      const bbox = svg.getBBox()
+      if (bbox && bbox.width && bbox.height) return [bbox.x, bbox.y, bbox.width, bbox.height]
+    } catch (e) {
+      // getBBox may fail on some edge cases; ignore
+    }
+
+    const w = Number(svg.getAttribute('width')) || 0
+    const h = Number(svg.getAttribute('height')) || 0
+    if (w > 0 && h > 0) return [0, 0, w, h]
+    return [0, 0, 100, 100]
+  }
+
+  const setSvgViewBox = (svg, vb) => {
+    svg.setAttribute('viewBox', `${vb[0]} ${vb[1]} ${vb[2]} ${vb[3]}`)
+  }
+
+  const clamp = (v, min, max) => Math.max(min, Math.min(max, v))
+
+  const openSvgInNewTab = ({ source, initViewBox }) => {
+    const getClonedSvg = () => {
+      if (typeof source === 'string') {
+        const template = document.createElement('template')
+        template.innerHTML = source.trim()
+        const svg = template.content.querySelector('svg')
+        return svg ? svg.cloneNode(true) : null
+      }
+      if (source && typeof source.cloneNode === 'function') {
+        return source.cloneNode(true)
+      }
+      return null
+    }
+
+    const clone = getClonedSvg()
+    if (!clone) return
+    if (initViewBox && initViewBox.length === 4) {
+      clone.setAttribute('viewBox', initViewBox.join(' '))
+    }
+    if (!clone.getAttribute('xmlns')) clone.setAttribute('xmlns', 'http://www.w3.org/2000/svg')
+    if (!clone.getAttribute('xmlns:xlink') && clone.innerHTML.includes('xlink:')) {
+      clone.setAttribute('xmlns:xlink', 'http://www.w3.org/1999/xlink')
+    }
+    // inject background to match current theme
+    const isDark = document.documentElement.getAttribute('data-theme') === 'dark'
+    const bg = getComputedStyle(document.body).backgroundColor || (isDark ? '#1e1e1e' : '#ffffff')
+    if (!clone.style.background) clone.style.background = bg
+
+    const serializer = new XMLSerializer()
+    const svgSource = serializer.serializeToString(clone)
+    const htmlSource = `<!doctype html><html><head><meta charset="utf-8" />
+      <style>
+        html, body { width: 100%; height: 100%; margin: 0; display: flex; align-items: center; justify-content: center; background: ${bg}; }
+        svg { max-width: 100%; max-height: 100%; height: auto; width: auto; }
+      </style>
+      </head><body>${svgSource}</body></html>`
+    const blob = new Blob([htmlSource], { type: 'text/html;charset=utf-8' })
+    const url = URL.createObjectURL(blob)
+    window.open(url, '_blank', 'noopener')
+
+    setTimeout(() => URL.revokeObjectURL(url), 5000)
+  }
+
+  const attachMermaidViewerButton = wrap => {
+    let btn = wrap.querySelector('.mermaid-open-btn')
+    if (!btn) {
+      btn = document.createElement('button')
+      btn.type = 'button'
+      btn.className = 'mermaid-open-btn'
+      wrap.appendChild(btn)
+    }
+
+    btn.innerHTML = '<i class="fa fa-search fa-fw" aria-hidden="true"></i>'
+
+    if (!btn.__mermaidViewerBound) {
+      btn.addEventListener('click', e => {
+        e.preventDefault()
+        e.stopPropagation()
+        const svg = wrap.__mermaidOriginalSvg || wrap.querySelector('svg')
+        if (!svg) return
+        const initViewBox = wrap.__mermaidInitViewBox
+        openSvgInNewTab({ source: svg, initViewBox })
+      })
+      btn.__mermaidViewerBound = true
+    }
+  }
+
+  // Zoom around a point (px, py) in the SVG viewport (in viewBox coordinates)
+  const zoomAtPoint = (vb, factor, px, py) => {
+    const w = vb[2] * factor
+    const h = vb[3] * factor
+    const nx = px - (px - vb[0]) * factor
+    const ny = py - (py - vb[1]) * factor
+    return [nx, ny, w, h]
+  }
+
+  const initMermaidGestures = wrap => {
+    // Clean up previous event listeners and pending frames
+    if (wrap.__mermaidAbortController) {
+      wrap.__mermaidAbortController.abort()
+      if (wrap.__mermaidRafId) cancelAnimationFrame(wrap.__mermaidRafId)
+    }
+    const ac = new AbortController()
+    wrap.__mermaidAbortController = ac
+    const svg = wrap.querySelector('svg')
+    if (!svg) return
+
+    // Ensure viewBox exists so gestures always work
+    const initVb = getSvgViewBox(svg)
+    wrap.__mermaidInitViewBox = initVb
+    wrap.__mermaidCurViewBox = initVb.slice()
+    setSvgViewBox(svg, initVb)
+    // Disable default gestures to prevent scroll chaining and pinch-zoom penetration in Chrome
+    svg.style.touchAction = 'none'
+
+    // Cache BoundingClientRect, throttled on scroll to reduce reflow
+    let cachedRect = svg.getBoundingClientRect()
+    let rectDirty = false
+    const markRectDirty = () => { rectDirty = true }
+    window.addEventListener('resize', markRectDirty, { signal: ac.signal })
+    window.addEventListener('scroll', markRectDirty, { signal: ac.signal, capture: true })
+    const getRect = () => {
+      if (rectDirty) {
+        cachedRect = svg.getBoundingClientRect()
+        rectDirty = false
+      }
+      return cachedRect
+    }
+
+    // Precompute clamp bounds from initial viewBox
+    const minW = initVb[2] * 0.1
+    const maxW = initVb[2] * 10
+    const minH = initVb[3] * 0.1
+    const maxH = initVb[3] * 10
+    const clampVb = vb => {
+      const out = vb.slice()
+      out[2] = clamp(out[2], minW, maxW)
+      out[3] = clamp(out[3], minH, maxH)
+      return out
+    }
+
+    // Throttle DOM updates using requestAnimationFrame
+    let pendingVb = null
+    let rafId = null
+    const applyVb = () => {
+      if (pendingVb) {
+        wrap.__mermaidCurViewBox = pendingVb
+        setSvgViewBox(svg, pendingVb)
+        pendingVb = null
+      }
+      rafId = null
+      wrap.__mermaidRafId = null
+    }
+    const setCurVb = vb => {
+      pendingVb = clampVb(vb)
+      if (!rafId) {
+        rafId = requestAnimationFrame(applyVb)
+        wrap.__mermaidRafId = rafId
+      }
+    }
+
+    const state = {
+      pointers: new Map(),
+      startVb: null,
+      startDist: 0,
+      lastPointerX: 0,
+      lastPointerY: 0
+    }
+
+    const onPointerDown = e => {
+      if (e.pointerType === 'mouse' && e.button !== 0) return
+      svg.setPointerCapture(e.pointerId)
+      const curVb = wrap.__mermaidCurViewBox
+      state.pointers.set(e.pointerId, { x: e.clientX, y: e.clientY })
+      if (state.pointers.size === 1) {
+        state.startVb = curVb.slice()
+        state.lastPointerX = e.clientX
+        state.lastPointerY = e.clientY
+      } else if (state.pointers.size === 2) {
+        const pts = [...state.pointers.values()]
+        const dx = pts[0].x - pts[1].x
+        const dy = pts[0].y - pts[1].y
+        state.startDist = Math.hypot(dx, dy)
+        state.startVb = curVb.slice()
+      }
+    }
+
+    const onPointerMove = e => {
+      if (!state.pointers.has(e.pointerId)) return
+      state.pointers.set(e.pointerId, { x: e.clientX, y: e.clientY })
+      const curVb = wrap.__mermaidCurViewBox
+      const rect = getRect()
+      if (state.pointers.size === 1 && state.startVb) {
+        const p = state.pointers.values().next().value
+        const dxClient = p.x - state.lastPointerX
+        const dyClient = p.y - state.lastPointerY
+        state.lastPointerX = p.x
+        state.lastPointerY = p.y
+        const dx = dxClient * (curVb[2] / rect.width)
+        const dy = dyClient * (curVb[3] / rect.height)
+        setCurVb([curVb[0] - dx, curVb[1] - dy, curVb[2], curVb[3]])
+        return
+      }
+      if (state.pointers.size === 2 && state.startVb && state.startDist > 0) {
+        const pts = [...state.pointers.values()]
+        const dx = pts[0].x - pts[1].x
+        const dy = pts[0].y - pts[1].y
+        const dist = Math.hypot(dx, dy)
+        if (!dist) return
+        const factor = state.startDist / dist
+        const cx = (pts[0].x + pts[1].x) / 2
+        const cy = (pts[0].y + pts[1].y) / 2
+        const px = curVb[0] + (cx - rect.left) * (curVb[2] / rect.width)
+        const py = curVb[1] + (cy - rect.top) * (curVb[3] / rect.height)
+        setCurVb(zoomAtPoint(state.startVb, factor, px, py))
+      }
+    }
+
+    const onPointerUpOrCancel = e => {
+      // Release PointerCapture to avoid event capture anomalies
+      if (svg.hasPointerCapture && svg.hasPointerCapture(e.pointerId)) {
+        svg.releasePointerCapture(e.pointerId)
+      }
+      state.pointers.delete(e.pointerId)
+      if (state.pointers.size === 0) {
+        state.startVb = null
+        state.startDist = 0
+      } else if (state.pointers.size === 1) {
+        const p = state.pointers.values().next().value
+        state.lastPointerX = p.x
+        state.lastPointerY = p.y
+      }
+    }
+
+    const onWheel = e => {
+      // Prevent event bubbling from triggering external scroll
+      e.preventDefault()
+      e.stopPropagation()
+      // Normalize deltaY across deltaMode (Chrome uses pixels, Safari uses lines)
+      let delta = e.deltaY
+      if (e.deltaMode === 1) delta *= 16
+      else if (e.deltaMode === 2) delta *= 400
+
+      // Continuous zoom factor: smoother than fixed 1.1/0.9 steps
+      const zoomFactor = Math.pow(1.001, delta)
+
+      const curVb = wrap.__mermaidCurViewBox
+      const rect = getRect()
+      const px = curVb[0] + (e.clientX - rect.left) * (curVb[2] / rect.width)
+      const py = curVb[1] + (e.clientY - rect.top) * (curVb[3] / rect.height)
+      setCurVb(zoomAtPoint(curVb, zoomFactor, px, py))
+    }
+
+    const onDblClick = () => {
+      const init = wrap.__mermaidInitViewBox
+      if (init) setCurVb(init)
+    }
+
+    svg.addEventListener('pointerdown', onPointerDown, { signal: ac.signal })
+    svg.addEventListener('pointermove', onPointerMove, { signal: ac.signal })
+    svg.addEventListener('pointerup', onPointerUpOrCancel, { signal: ac.signal })
+    svg.addEventListener('pointercancel', onPointerUpOrCancel, { signal: ac.signal })
+    svg.addEventListener('wheel', onWheel, { passive: false, signal: ac.signal })
+    svg.addEventListener('dblclick', onDblClick, { signal: ac.signal })
+  }
+
+  const runMermaid = ele => {
+    window.loadMermaid = true
+    const theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'default'
+    ele.forEach((item, index) => {
+      const mermaidSrc = item.firstElementChild
+      // Clean up event listeners before removing old SVG
+      if (item.__mermaidAbortController) {
+        item.__mermaidAbortController.abort()
+      }
+      const oldSvg = item.querySelector('svg')
+      if (oldSvg) oldSvg.remove()
+      let config = {}
+      try {
+        config = mermaidSrc.dataset.config ? JSON.parse(mermaidSrc.dataset.config) : {}
+      } catch (e) {
+        console.warn('[mermaid] failed to parse dataset.config:', e)
+      }
+      if (!config.theme) {
+        config.theme = theme
+      }
+      const mermaidThemeConfig = `%%{init: ${JSON.stringify(config)}}%%\n`
+      const mermaidID = `mermaid-${index}`
+      const mermaidDefinition = mermaidThemeConfig + mermaidSrc.textContent
+
+      const renderMermaid = svg => {
+        mermaidSrc.insertAdjacentHTML('afterend', svg)
+        if (true) initMermaidGestures(item)
+        item.__mermaidOriginalSvg = svg
+        if (true) attachMermaidViewerButton(item)
+      }
+
+      const handleError = err => {
+        console.error(`[mermaid] render failed for block #${index}:`, err)
+        const errorEl = document.createElement('div')
+        errorEl.className = 'mermaid-error'
+        errorEl.textContent = `Mermaid render error: ${err.message || err}`
+        mermaidSrc.insertAdjacentElement('afterend', errorEl)
+      }
+
+      try {
+        const renderFn = mermaid.render(mermaidID, mermaidDefinition)
+        // mermaid v9 and v10 compatibility
+        if (typeof renderFn === 'string') {
+          renderMermaid(renderFn)
+        } else {
+          renderFn.then(({ svg }) => renderMermaid(svg)).catch(handleError)
+        }
+      } catch (err) {
+        handleError(err)
+      }
+    })
+  }
+
+  const codeToMermaid = $article => {
+    const codeMermaidEle = $article.querySelectorAll('pre > code.mermaid')
+    if (codeMermaidEle.length === 0) return
+
+    codeMermaidEle.forEach(ele => {
+      const preEle = document.createElement('pre')
+      preEle.className = 'mermaid-src'
+      preEle.hidden = true
+      preEle.textContent = ele.textContent
+      const newEle = document.createElement('div')
+      newEle.className = 'mermaid-wrap'
+      newEle.appendChild(preEle)
+      ele.parentNode.replaceWith(newEle)
+    })
+  }
+
+  const loadMermaid = () => {
+    const $article = document.getElementById('article-container')
+    if (!$article) return
+
+    if (false) codeToMermaid($article)
+    const $mermaid = $article.querySelectorAll('.mermaid-wrap')
+    if ($mermaid.length === 0) return
+
+    const runMermaidFn = () => runMermaid($mermaid)
+    btf.addGlobalFn('themeChange', runMermaidFn, 'mermaid')
+    window.loadMermaid ? runMermaidFn() : btf.getScript('https://cdn.jsdelivr.net/npm/mermaid@11.16.0/dist/mermaid.min.js').then(runMermaidFn)
+  }
+
+  btf.addGlobalFn('encrypt', loadMermaid, 'mermaid')
+  window.pjax ? loadMermaid() : document.addEventListener('DOMContentLoaded', loadMermaid)
+})()</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
