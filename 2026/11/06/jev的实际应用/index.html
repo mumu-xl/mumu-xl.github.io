@@ -1,0 +1,659 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>JEV 的实际应用：用 operation-risk-gate 给日常AI开发加一道门 | mumu</title><meta name="author" content="John Doe"><meta name="copyright" content="John Doe"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="最近越来越多的开发工作交给大模型：改代码、跑脚本、执行迁移、处理 Git、操作服务器。效率确实提高了，但也带来了一个很现实的问题：模型一旦拥有执行权限，就可能把一个“看起来合理”的开发动作变成高风险操作。 我写的 operation-risk-gate skill，就是为了解决这个问题。它的核心不是教模型“永远不要犯错”，而是在真正执行动作之前，强制对风险做一次独立审查。 第一部分：日常开发中有哪">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JEV 的实际应用：用 operation-risk-gate 给日常AI开发加一道门">
+<meta property="og:url" content="http://example.com/2026/11/06/jev%E7%9A%84%E5%AE%9E%E9%99%85%E5%BA%94%E7%94%A8/index.html">
+<meta property="og:site_name" content="mumu">
+<meta property="og:description" content="最近越来越多的开发工作交给大模型：改代码、跑脚本、执行迁移、处理 Git、操作服务器。效率确实提高了，但也带来了一个很现实的问题：模型一旦拥有执行权限，就可能把一个“看起来合理”的开发动作变成高风险操作。 我写的 operation-risk-gate skill，就是为了解决这个问题。它的核心不是教模型“永远不要犯错”，而是在真正执行动作之前，强制对风险做一次独立审查。 第一部分：日常开发中有哪">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/img/butterfly-icon.jpg">
+<meta property="article:published_time" content="2026-11-06T06:00:00.000Z">
+<meta property="article:modified_time" content="2026-11-06T05:41:03.234Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="AI">
+<meta property="article:tag" content="Agent">
+<meta property="article:tag" content="JEV">
+<meta property="article:tag" content="Skill">
+<meta property="article:tag" content="安全">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/img/butterfly-icon.jpg"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "JEV 的实际应用：用 operation-risk-gate 给日常AI开发加一道门",
+  "url": "http://example.com/2026/11/06/jev%E7%9A%84%E5%AE%9E%E9%99%85%E5%BA%94%E7%94%A8/",
+  "image": "http://example.com/img/butterfly-icon.jpg",
+  "datePublished": "2026-11-06T06:00:00.000Z",
+  "dateModified": "2026-11-06T05:41:03.234Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "John Doe",
+      "url": "http://example.com"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/favicon.jpg"><link rel="canonical" href="http://example.com/2026/11/06/jev%E7%9A%84%E5%AE%9E%E9%99%85%E5%BA%94%E7%94%A8/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.7.0"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.3.1/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        const data = { value }
+
+        if (ttl != null) {
+          data.expiry = Date.now() + ttl * 86400000
+        }
+
+        localStorage.setItem(key, JSON.stringify(data))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return
+
+        try {
+          const data = JSON.parse(itemStr)
+
+          if (data.expiry && Date.now() > data.expiry) {
+            localStorage.removeItem(key)
+            return
+          }
+
+          return data.value
+        } catch {
+          localStorage.removeItem(key)
+        }
+      }
+    }
+
+    const scriptCache = new Map()
+    const cssCache = new Map()
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => {
+        if (scriptCache.has(url)) {
+          return scriptCache.get(url)
+        }
+
+        const promise = new Promise((resolve, reject) => {
+          const script = document.createElement('script')
+
+          script.src = url
+          script.async = true
+
+          for (const key in attr) {
+            script.setAttribute(key, attr[key])
+          }
+
+          script.onload = resolve
+          script.onerror = reject
+
+          document.head.appendChild(script)
+        })
+
+        scriptCache.set(url, promise)
+
+        return promise
+      },
+      getCSS: (url, id) => {
+        if (cssCache.has(url)) {
+          return cssCache.get(url)
+        }
+
+        const promise = new Promise((resolve, reject) => {
+          const link = document.createElement('link')
+
+          link.rel = 'stylesheet'
+          link.href = url
+
+          if (id) {
+            link.id = id
+          }
+
+          link.onload = resolve
+          link.onerror = reject
+
+          document.head.appendChild(link)
+        })
+
+        cssCache.set(url, promise)
+
+        return promise
+      },
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const metaThemeColor = document.querySelector('meta[name="theme-color"]')
+      const activateDarkMode = () => {
+        document.documentElement.dataset.theme = 'dark'
+        if (metaThemeColor !== null) {
+          metaThemeColor.setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.dataset.theme = 'light'
+        if (metaThemeColor !== null) {
+          metaThemeColor.setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: 'Copy Successful',
+    error: 'Copy Failed',
+    noSupport: 'Browser Not Supported'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: 'Just now',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.13.0/dist/infinitegrid.min.js',
+    buttonText: 'Load More'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'JEV 的实际应用：用 operation-risk-gate 给日常AI开发加一道门',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 8.1.1"></head><body><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(/img/home-bg.jpg);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">mumu</span></a><a class="nav-page-title" href="/"><span class="site-name">JEV 的实际应用：用 operation-risk-gate 给日常AI开发加一道门</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  Back to Home</span></span></a></span><div id="menus"></div></nav><div id="post-info"><h1 class="post-title">JEV 的实际应用：用 operation-risk-gate 给日常AI开发加一道门</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2026-11-06T06:00:00.000Z" title="Created 2026-11-06 14:00:00">2026-11-06</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2026-11-06T05:41:03.234Z" title="Updated 2026-11-06 13:41:03">2026-11-06</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post Views:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><p>最近越来越多的开发工作交给大模型：改代码、跑脚本、执行迁移、处理 Git、操作服务器。效率确实提高了，但也带来了一个很现实的问题：<strong>模型一旦拥有执行权限，就可能把一个“看起来合理”的开发动作变成高风险操作。</strong></p>
+<p>我写的 <code>operation-risk-gate</code> skill，就是为了解决这个问题。它的核心不是教模型“永远不要犯错”，而是在真正执行动作之前，强制对风险做一次独立审查。</p>
+<h2 id="第一部分：日常开发中有哪些高风险操作"><a href="#第一部分：日常开发中有哪些高风险操作" class="headerlink" title="第一部分：日常开发中有哪些高风险操作"></a>第一部分：日常开发中有哪些高风险操作</h2><h3 id="1-误删代码和工作区文件"><a href="#1-误删代码和工作区文件" class="headerlink" title="1. 误删代码和工作区文件"></a>1. 误删代码和工作区文件</h3><p>比如让 Agent “清理一下没用的文件”，它可能执行：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">rm</span> -rf ./src</span><br></pre></td></tr></table></figure>
+
+<p>或者删除构建目录时，路径解析错误，把项目根目录、挂载目录甚至备份目录一起删掉。</p>
+<p>这类操作的问题不只是文件能不能恢复，还包括：删除目标是否明确、有没有备份、是否包含用户未提交的代码、是否会影响其他项目。</p>
+<h3 id="2-Git-回滚和历史改写"><a href="#2-Git-回滚和历史改写" class="headerlink" title="2. Git 回滚和历史改写"></a>2. Git 回滚和历史改写</h3><p>开发中经常会说“回到上一个版本”“把刚才的改动撤销”。但下面这些命令的后果完全不同：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git restore .</span><br><span class="line">git reset --hard HEAD</span><br><span class="line">git push --force-with-lease</span><br></pre></td></tr></table></figure>
+
+<p>如果 Agent 没有先确认分支、提交范围和未提交内容，就可能误删本地代码、覆盖团队提交，或者改写共享分支历史。</p>
+<h3 id="3-误删数据库和数据"><a href="#3-误删数据库和数据" class="headerlink" title="3. 误删数据库和数据"></a>3. 误删数据库和数据</h3><p>这是最容易造成事故的一类：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">DROP</span> <span class="keyword">TABLE</span> users;</span><br><span class="line"><span class="keyword">TRUNCATE</span> <span class="keyword">TABLE</span> orders;</span><br><span class="line"><span class="keyword">DELETE</span> <span class="keyword">FROM</span> users;</span><br></pre></td></tr></table></figure>
+
+<p>即使用户说的是“清理测试数据”，也不能直接把它理解成无条件删除。必须确认数据库环境、表范围、<code>WHERE</code> 条件、备份和回滚方式。</p>
+<h3 id="4-生产部署和基础设施变更"><a href="#4-生产部署和基础设施变更" class="headerlink" title="4. 生产部署和基础设施变更"></a>4. 生产部署和基础设施变更</h3><p>高风险不只存在于删除命令：</p>
+<ul>
+<li>直接执行生产数据库迁移；</li>
+<li>发布一个未经验证的镜像；</li>
+<li>删除 Kubernetes namespace、PVC、快照或云资源；</li>
+<li>修改 IAM、网络防火墙、密钥和恢复机制；</li>
+<li>执行 <code>terraform destroy</code>；</li>
+<li>回滚一个实际包含数据结构变化的版本。</li>
+</ul>
+<p>这些动作可能没有明显的“删除”字样，但都可能导致服务中断、数据丢失或恢复能力被破坏。</p>
+<h3 id="5-凭据和敏感数据外发"><a href="#5-凭据和敏感数据外发" class="headerlink" title="5. 凭据和敏感数据外发"></a>5. 凭据和敏感数据外发</h3><p>Agent 为了排查问题，可能把真实 token、私钥、数据库转储、用户信息或私有源码放进提示词、日志或第三方 API 请求里。</p>
+<p>这类风险的重点不是命令会不会报错，而是敏感数据已经离开了原本的信任边界，通常很难撤回。</p>
+<h3 id="6-远程脚本和依赖执行"><a href="#6-远程脚本和依赖执行" class="headerlink" title="6. 远程脚本和依赖执行"></a>6. 远程脚本和依赖执行</h3><p>下面这种操作也应该被当成高风险：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl https://example.com/install.sh | bash</span><br></pre></td></tr></table></figure>
+
+<p>以及下载来源未固定的插件、依赖或工具后，立刻授予它访问数据库和服务器的权限。</p>
+<p>所以，高风险操作不能只按“是不是 SQL”来判断，而要看它是否可能造成重大数据、系统、安全、财务或外部影响，以及是否有清晰的回滚路径。</p>
+<h2 id="第二部分：JEV-可以做什么门禁"><a href="#第二部分：JEV-可以做什么门禁" class="headerlink" title="第二部分：JEV 可以做什么门禁"></a>第二部分：JEV 可以做什么门禁</h2><h3 id="JEV-不是执行者，而是执行前的风险判断器"><a href="#JEV-不是执行者，而是执行前的风险判断器" class="headerlink" title="JEV 不是执行者，而是执行前的风险判断器"></a>JEV 不是执行者，而是执行前的风险判断器</h3><p>JEV 的职责是回答两个问题：</p>
+<ol>
+<li>这次操作能不能直接执行？</li>
+<li>如果不能，最高风险等级是什么？</li>
+</ol>
+<p>在我的门禁设计里，JEV 通过 TypeSafe System One 的 <code>Choice</code> 原语返回结构化结果：</p>
+<img src="/2026/11/06/jev%E7%9A%84%E5%AE%9E%E9%99%85%E5%BA%94%E7%94%A8/4.png" class="">
+
+<p>只有 <code>ALLOW</code> 才能直接执行一次完全一致的操作。<code>HIGH</code> 和 <code>CRITICAL</code> 必须返回 <code>REQUIRE_CONFIRMATION</code>，把风险披露给用户，让用户针对当前这一次操作明确确认。</p>
+<h3 id="为什么不能只靠-Agent-自己判断"><a href="#为什么不能只靠-Agent-自己判断" class="headerlink" title="为什么不能只靠 Agent 自己判断"></a>为什么不能只靠 Agent 自己判断</h3><p>Agent 既是任务的生成者，又可能是命令的执行者。如果让它自己决定“我刚刚生成的命令安全吗”，就缺少了独立的检查环节。</p>
+<p>JEV 把操作从 Agent 的执行链路中抽出来，只接收结构化的操作描述：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;intent&quot;</span><span class="punctuation">:</span> <span class="string">&quot;回滚当前分支到上一个提交&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;operation&quot;</span><span class="punctuation">:</span> <span class="string">&quot;git reset --hard HEAD~1&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;targets&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span><span class="string">&quot;当前仓库 feature/login 分支&quot;</span><span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;environment&quot;</span><span class="punctuation">:</span> <span class="string">&quot;local development&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;data_classes&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span><span class="string">&quot;未提交源代码、Git 历史&quot;</span><span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;reversible&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">false</span></span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;backup&quot;</span><span class="punctuation">:</span> <span class="string">&quot;无独立补丁备份&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;user_authorized&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>这里的 <code>user_authorized</code> 只能说明用户提出了任务，不能让危险操作自动变安全。目标、环境、影响范围或回滚方式不明确时，JEV 应该要求确认。</p>
+<h3 id="JEV-失败时也不能绕过"><a href="#JEV-失败时也不能绕过" class="headerlink" title="JEV 失败时也不能绕过"></a>JEV 失败时也不能绕过</h3><p>如果 JEV 服务超时、网络不可用、返回格式错误或字段互相矛盾，结果应该是：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">REVIEW_ERROR</span><br></pre></td></tr></table></figure>
+
+<p>这时必须暂停，而不是因为“审查服务暂时不可用”就执行原命令。风险门禁要失败关闭。</p>
+<h2 id="第三部分：operation-risk-gate-skill-介绍"><a href="#第三部分：operation-risk-gate-skill-介绍" class="headerlink" title="第三部分：operation-risk-gate skill 介绍"></a>第三部分：operation-risk-gate skill 介绍</h2><h3 id="1-它解决的核心问题"><a href="#1-它解决的核心问题" class="headerlink" title="1. 它解决的核心问题"></a>1. 它解决的核心问题</h3><p><code>operation-risk-gate</code> 是一个面向 Agent 的执行前安全门禁。它覆盖的不只是数据库，而是所有会产生外部副作用的动作：</p>
+<ul>
+<li>创建、编辑、覆盖、移动或删除文件；</li>
+<li>修改代码、配置、依赖、权限和 Git 状态；</li>
+<li>写入数据库、缓存、队列、对象存储和云服务；</li>
+<li>向命令、API 或第三方提交敏感输入；</li>
+<li>发送消息、发布内容、部署、发版、购买和计费。</li>
+</ul>
+<p>也就是说，只要动作可能改变系统状态，就不应该只凭 Agent 的自然语言判断直接执行。</p>
+<h3 id="2-它的强制流程"><a href="#2-它的强制流程" class="headerlink" title="2. 它的强制流程"></a>2. 它的强制流程</h3><p>这个 skill 要求 Agent 在执行前完成以下步骤。</p>
+<h4 id="第一步：把下一步动作写具体"><a href="#第一步：把下一步动作写具体" class="headerlink" title="第一步：把下一步动作写具体"></a>第一步：把下一步动作写具体</h4><p>不能只写“清理一下数据库”，而要写清楚：执行什么命令、目标是什么、在哪个环境、影响什么数据、是否可回滚、有没有备份。</p>
+<h4 id="第二步：遇到不明确的高风险场景，读取风险策略"><a href="#第二步：遇到不明确的高风险场景，读取风险策略" class="headerlink" title="第二步：遇到不明确的高风险场景，读取风险策略"></a>第二步：遇到不明确的高风险场景，读取风险策略</h4><p>风险策略明确列出了必须要求二次确认的情况，例如破坏性数据库操作、大范围删除、生产基础设施修改、敏感信息外发、强制 Git 操作和未经检查的远程代码执行。</p>
+<h4 id="第三步：调用-jev-guard-py"><a href="#第三步：调用-jev-guard-py" class="headerlink" title="第三步：调用 jev_guard.py"></a>第三步：调用 <code>jev_guard.py</code></h4><p>skill 提供的入口是：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">python3 scripts/jev_guard.py &lt;&lt;<span class="string">&#x27;JSON&#x27;</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="string">&quot;intent&quot;</span>: <span class="string">&quot;执行数据库迁移&quot;</span>,</span><br><span class="line">  <span class="string">&quot;operation&quot;</span>: <span class="string">&quot;alembic upgrade head&quot;</span>,</span><br><span class="line">  <span class="string">&quot;targets&quot;</span>: [<span class="string">&quot;预发布数据库&quot;</span>],</span><br><span class="line">  <span class="string">&quot;environment&quot;</span>: <span class="string">&quot;staging&quot;</span>,</span><br><span class="line">  <span class="string">&quot;data_classes&quot;</span>: [<span class="string">&quot;应用数据&quot;</span>],</span><br><span class="line">  <span class="string">&quot;reversible&quot;</span>: <span class="literal">true</span>,</span><br><span class="line">  <span class="string">&quot;backup&quot;</span>: <span class="string">&quot;快照 staging-db-2026-11-06&quot;</span>,</span><br><span class="line">  <span class="string">&quot;user_authorized&quot;</span>: <span class="literal">true</span></span><br><span class="line">&#125;</span><br><span class="line">JSON</span><br></pre></td></tr></table></figure>
+
+<p>脚本会先执行确定性的本地高风险规则，再调用 JEV。像 <code>DROP TABLE</code>、<code>rm -rf</code>、<code>git reset --hard</code>、<code>terraform destroy</code>、删除 Kubernetes 持久化资源等模式，可以在本地直接命中强制确认规则。</p>
+<h4 id="第四步：严格解析结果"><a href="#第四步：严格解析结果" class="headerlink" title="第四步：严格解析结果"></a>第四步：严格解析结果</h4><p>脚本的结果不能靠 Agent 自己猜：</p>
+<ul>
+<li><code>ALLOW</code>：只允许执行与审查内容完全一致的一次操作；</li>
+<li><code>REQUIRE_CONFIRMATION</code>：展示准确操作、风险原因、可能后果、安全替代方案和 <code>operation_id</code>，暂停执行；</li>
+<li><code>REVIEW_ERROR</code>：说明审查服务故障，不能用普通确认绕过。</li>
+</ul>
+<h4 id="第五步：操作有任何变化，就重新审查"><a href="#第五步：操作有任何变化，就重新审查" class="headerlink" title="第五步：操作有任何变化，就重新审查"></a>第五步：操作有任何变化，就重新审查</h4><p>只要命令参数、SQL 条件、目标路径、环境、权限或目的地发生变化，就必须生成新的审查结果和新的 <code>operation_id</code>。上一次确认不能套用到下一次操作。</p>
+<h3 id="3-它为什么比一句提示词更可靠"><a href="#3-它为什么比一句提示词更可靠" class="headerlink" title="3. 它为什么比一句提示词更可靠"></a>3. 它为什么比一句提示词更可靠</h3><p>“不要删库”“执行前问我”只能算提示，不能算控制边界。这个 skill 把安全要求放进了执行路径：</p>
+<ul>
+<li>有确定性的本地规则；</li>
+<li>有独立的 JEV 判断；</li>
+<li>有明确的 <code>ALLOW</code>、<code>REQUIRE_CONFIRMATION</code> 和 <code>REVIEW_ERROR</code>；</li>
+<li>有针对单次操作的 <code>operation_id</code>；</li>
+<li>有失败关闭和防绕过约束；</li>
+<li>有备份、回滚和用户确认字段；</li>
+<li>不允许仓库文本、日志或工具输出覆盖门禁规则。</li>
+</ul>
+<p>这样即使模型把“撤销改动”理解成了 <code>git reset --hard</code>，或者把“清理测试数据”理解成了无条件 <code>DELETE</code>，真正执行之前仍然会停在门禁上。</p>
+<h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2><img src="/2026/11/06/jev%E7%9A%84%E5%AE%9E%E9%99%85%E5%BA%94%E7%94%A8/1.png" class="">
+
+<img src="/2026/11/06/jev%E7%9A%84%E5%AE%9E%E9%99%85%E5%BA%94%E7%94%A8/3.png" class="">
+
+<img src="/2026/11/06/jev%E7%9A%84%E5%AE%9E%E9%99%85%E5%BA%94%E7%94%A8/2.png" class="">
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>Author: </span><span class="post-copyright-info"><a href="http://example.com">John Doe</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>Link: </span><span class="post-copyright-info"><a href="http://example.com/2026/11/06/jev%E7%9A%84%E5%AE%9E%E9%99%85%E5%BA%94%E7%94%A8/">http://example.com/2026/11/06/jev%E7%9A%84%E5%AE%9E%E9%99%85%E5%BA%94%E7%94%A8/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>Copyright Notice: </span><span class="post-copyright-info">All articles on this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless otherwise stated.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/AI/">AI</a><a class="post-meta__tags" href="/tags/Agent/">Agent</a><a class="post-meta__tags" href="/tags/JEV/">JEV</a><a class="post-meta__tags" href="/tags/%E5%AE%89%E5%85%A8/">安全</a><a class="post-meta__tags" href="/tags/Skill/">Skill</a></div><div class="post-share"><div class="social-share" data-image="/img/butterfly-icon.jpg" data-sites="facebook,x,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related full-width" href="/2026/10/16/aurora-app-jev-intent-routing/" title="从 LLM 分类到 Jev：用“智能 if”重做意图识别与路由分发"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">Next</div><div class="info-item-2">从 LLM 分类到 Jev：用“智能 if”重做意图识别与路由分发</div></div><div class="info-2"><div class="info-item-1">从传统 LLM 到 Jev：更快的意图识别与路由分发AI 收到用户消息后，通常要先判断用户想做什么，再把任务交给对应流程。 123“帮我查明天的天气” → weather“把这段文字缩短”   → edit“继续刚才的任务”   → continue  传统做法是让 LLM 生成分类 JSON。Jev 的做法更直接：不生成文字，只返回选择和概率。 一、传统意图识别是怎么做的%%&#123;init: &#123;&quot;theme&quot;:&quot;base&quot;,&quot;themeVariables&quot;:&#123;&quot;fontFamily&quot;:&quot;Arial&quot;,&quot;primaryColor&quot;:&quot;#E8F1FF&quot;,&quot;primaryTextColor&quot;:&quot;#172033&quot;,&quot;primaryBorderColor&quot;:&quot;#5B8DEF&quot;,&quot;lineColor&quot;:&quot;#7B879E...</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>Related Articles</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2026/10/16/aurora-app-jev-intent-routing/" title="从 LLM 分类到 Jev：用“智能 if”重做意图识别与路由分发"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-10-16</div><div class="info-item-2">从 LLM 分类到 Jev：用“智能 if”重做意图识别与路由分发</div></div><div class="info-2"><div class="info-item-1">从传统 LLM 到 Jev：更快的意图识别与路由分发AI 收到用户消息后，通常要先判断用户想做什么，再把任务交给对应流程。 123“帮我查明天的天气” → weather“把这段文字缩短”   → edit“继续刚才的任务”   → continue  传统做法是让 LLM 生成分类 JSON。Jev 的做法更直接：不生成文字，只返回选择和概率。 一、传统意图识别是怎么做的%%&#123;init: &#123;&quot;theme&quot;:&quot;base&quot;,&quot;themeVariables&quot;:&#123;&quot;fontFamily&quot;:&quot;Arial&quot;,&quot;primaryColor&quot;:&quot;#E8F1FF&quot;,&quot;primaryTextColor&quot;:&quot;#172033&quot;,&quot;primaryBorderColor&quot;:&quot;#5B8DEF&quot;,&quot;lineColor&quot;:&quot;#7B879E...</div></div></div></a><a class="pagination-related" href="/2026/06/05/cc-switch-deepseek-claude-code-openspec/" title="OpenSpec+deepseek 漫剧内容站实战总结"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-06-05</div><div class="info-item-2">OpenSpec+deepseek 漫剧内容站实战总结</div></div><div class="info-2"><div class="info-item-1">用 AI 写代码的人，应该都有过这种体验：一句话需求丢过去，AI 一顿猛写，方向跑偏，你得来回拉扯好几轮才能把代码掰回来。 更要命的是，同样一句话，给 Claude 是一个结果，给 DeepSeek 又是另一个结果，而且质量差距不小。久而久之就变成了”只用最强模型”——成本高，速度慢。 我现在的解法是：把 OpenSpec 作为核心锚点，配合 DeepSeek + Claude Code + CC Switch 打配合。 这篇文章主要讲 OpenSpec——它是什么、怎么用、生成什么文件、有哪些命令，以及为什么加上它之后，连国产大模型也能写出很标准的代码。  先简单认知一下其他三个工具DeepSeek：国产大模型，推理风格偏严谨保守，擅长逻辑分析和方案盘点。成本低。 Claude Code：工程能力最强的 AI 编程工具，擅长写复杂逻辑、重构、调试。 CC Switch：一键切换 Claude Code 使用的模型和配置。不同任务用不同模型（画页面换Kimi，写需求用deepseek，或者最新的小米大模型）。 这三个工具单独用都挺好，但有一个问题没解决：需求本身是乱的，模型再强也...</div></div></div></a><a class="pagination-related" href="/2026/07/03/%E5%AF%B9Rag%E7%9A%84%E6%8E%A2%E7%B4%A2/" title="对RAG的探索：从知识库治理到高效召回"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-07-03</div><div class="info-item-2">对RAG的探索：从知识库治理到高效召回</div></div><div class="info-2"><div class="info-item-1">Agent是什么？Agent &#x3D; RAG + LLM + Tools 对于我们大模型来说，从它被训练出来，他的知识就已经固化了，所以对于它没有的知识或者有些我们自己整理的数据就需要搭建一个知识库来通过RAG进行检索，召回丢给大模型让他整理回答，所以RAG的重要性不言而喻。 所以 RAG 真正难的地方，不是“怎么接一个向量库”，而是：如何让知识以更容易被检索、被判断、被更新的方式进入系统。 这篇文章结合 RAG 高级技术与调优的内容，整理一下我现在对 RAG 的理解。  RAG 的三个基本步骤RAG 可以拆成三个阶段：  Indexing：如何把知识存起来 Retrieval：如何从大量知识中找到一小部分有用内容 Generation：如何结合用户问题和检索结果生成答案   第一层：先把知识库处理好1. 为知识切片生成问题首先对于我们的数据，格式各种各样，如 text，pdf，office等等，我这边采用的操作读取所有的数据，然后转化成markdown格式，因为大模型天然对文本类型支持性更强。 接下来就是对我们的markdown数据进行重组变成chunk，chunk的结构...</div></div></div></a></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/butterfly-icon.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">John Doe</div><div class="author-info-description"></div><div class="site-data"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">11</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">21</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">1</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Contents</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E9%83%A8%E5%88%86%EF%BC%9A%E6%97%A5%E5%B8%B8%E5%BC%80%E5%8F%91%E4%B8%AD%E6%9C%89%E5%93%AA%E4%BA%9B%E9%AB%98%E9%A3%8E%E9%99%A9%E6%93%8D%E4%BD%9C"><span class="toc-number">1.</span> <span class="toc-text">第一部分：日常开发中有哪些高风险操作</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E8%AF%AF%E5%88%A0%E4%BB%A3%E7%A0%81%E5%92%8C%E5%B7%A5%E4%BD%9C%E5%8C%BA%E6%96%87%E4%BB%B6"><span class="toc-number">1.1.</span> <span class="toc-text">1. 误删代码和工作区文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-Git-%E5%9B%9E%E6%BB%9A%E5%92%8C%E5%8E%86%E5%8F%B2%E6%94%B9%E5%86%99"><span class="toc-number">1.2.</span> <span class="toc-text">2. Git 回滚和历史改写</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E8%AF%AF%E5%88%A0%E6%95%B0%E6%8D%AE%E5%BA%93%E5%92%8C%E6%95%B0%E6%8D%AE"><span class="toc-number">1.3.</span> <span class="toc-text">3. 误删数据库和数据</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E7%94%9F%E4%BA%A7%E9%83%A8%E7%BD%B2%E5%92%8C%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD%E5%8F%98%E6%9B%B4"><span class="toc-number">1.4.</span> <span class="toc-text">4. 生产部署和基础设施变更</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-%E5%87%AD%E6%8D%AE%E5%92%8C%E6%95%8F%E6%84%9F%E6%95%B0%E6%8D%AE%E5%A4%96%E5%8F%91"><span class="toc-number">1.5.</span> <span class="toc-text">5. 凭据和敏感数据外发</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-%E8%BF%9C%E7%A8%8B%E8%84%9A%E6%9C%AC%E5%92%8C%E4%BE%9D%E8%B5%96%E6%89%A7%E8%A1%8C"><span class="toc-number">1.6.</span> <span class="toc-text">6. 远程脚本和依赖执行</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E9%83%A8%E5%88%86%EF%BC%9AJEV-%E5%8F%AF%E4%BB%A5%E5%81%9A%E4%BB%80%E4%B9%88%E9%97%A8%E7%A6%81"><span class="toc-number">2.</span> <span class="toc-text">第二部分：JEV 可以做什么门禁</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#JEV-%E4%B8%8D%E6%98%AF%E6%89%A7%E8%A1%8C%E8%80%85%EF%BC%8C%E8%80%8C%E6%98%AF%E6%89%A7%E8%A1%8C%E5%89%8D%E7%9A%84%E9%A3%8E%E9%99%A9%E5%88%A4%E6%96%AD%E5%99%A8"><span class="toc-number">2.1.</span> <span class="toc-text">JEV 不是执行者，而是执行前的风险判断器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E8%83%BD%E5%8F%AA%E9%9D%A0-Agent-%E8%87%AA%E5%B7%B1%E5%88%A4%E6%96%AD"><span class="toc-number">2.2.</span> <span class="toc-text">为什么不能只靠 Agent 自己判断</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#JEV-%E5%A4%B1%E8%B4%A5%E6%97%B6%E4%B9%9F%E4%B8%8D%E8%83%BD%E7%BB%95%E8%BF%87"><span class="toc-number">2.3.</span> <span class="toc-text">JEV 失败时也不能绕过</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%B8%89%E9%83%A8%E5%88%86%EF%BC%9Aoperation-risk-gate-skill-%E4%BB%8B%E7%BB%8D"><span class="toc-number">3.</span> <span class="toc-text">第三部分：operation-risk-gate skill 介绍</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%AE%83%E8%A7%A3%E5%86%B3%E7%9A%84%E6%A0%B8%E5%BF%83%E9%97%AE%E9%A2%98"><span class="toc-number">3.1.</span> <span class="toc-text">1. 它解决的核心问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E5%AE%83%E7%9A%84%E5%BC%BA%E5%88%B6%E6%B5%81%E7%A8%8B"><span class="toc-number">3.2.</span> <span class="toc-text">2. 它的强制流程</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E6%AD%A5%EF%BC%9A%E6%8A%8A%E4%B8%8B%E4%B8%80%E6%AD%A5%E5%8A%A8%E4%BD%9C%E5%86%99%E5%85%B7%E4%BD%93"><span class="toc-number">3.2.1.</span> <span class="toc-text">第一步：把下一步动作写具体</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E6%AD%A5%EF%BC%9A%E9%81%87%E5%88%B0%E4%B8%8D%E6%98%8E%E7%A1%AE%E7%9A%84%E9%AB%98%E9%A3%8E%E9%99%A9%E5%9C%BA%E6%99%AF%EF%BC%8C%E8%AF%BB%E5%8F%96%E9%A3%8E%E9%99%A9%E7%AD%96%E7%95%A5"><span class="toc-number">3.2.2.</span> <span class="toc-text">第二步：遇到不明确的高风险场景，读取风险策略</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AC%AC%E4%B8%89%E6%AD%A5%EF%BC%9A%E8%B0%83%E7%94%A8-jev-guard-py"><span class="toc-number">3.2.3.</span> <span class="toc-text">第三步：调用 jev_guard.py</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AC%AC%E5%9B%9B%E6%AD%A5%EF%BC%9A%E4%B8%A5%E6%A0%BC%E8%A7%A3%E6%9E%90%E7%BB%93%E6%9E%9C"><span class="toc-number">3.2.4.</span> <span class="toc-text">第四步：严格解析结果</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AC%AC%E4%BA%94%E6%AD%A5%EF%BC%9A%E6%93%8D%E4%BD%9C%E6%9C%89%E4%BB%BB%E4%BD%95%E5%8F%98%E5%8C%96%EF%BC%8C%E5%B0%B1%E9%87%8D%E6%96%B0%E5%AE%A1%E6%9F%A5"><span class="toc-number">3.2.5.</span> <span class="toc-text">第五步：操作有任何变化，就重新审查</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E5%AE%83%E4%B8%BA%E4%BB%80%E4%B9%88%E6%AF%94%E4%B8%80%E5%8F%A5%E6%8F%90%E7%A4%BA%E8%AF%8D%E6%9B%B4%E5%8F%AF%E9%9D%A0"><span class="toc-number">3.3.</span> <span class="toc-text">3. 它为什么比一句提示词更可靠</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B5%8B%E8%AF%95"><span class="toc-number">4.</span> <span class="toc-text">测试</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Posts</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/11/06/jev%E7%9A%84%E5%AE%9E%E9%99%85%E5%BA%94%E7%94%A8/" title="JEV 的实际应用：用 operation-risk-gate 给日常AI开发加一道门">JEV 的实际应用：用 operation-risk-gate 给日常AI开发加一道门</a><time datetime="2026-11-06T06:00:00.000Z" title="Created 2026-11-06 14:00:00">2026-11-06</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/10/16/aurora-app-jev-intent-routing/" title="从 LLM 分类到 Jev：用“智能 if”重做意图识别与路由分发">从 LLM 分类到 Jev：用“智能 if”重做意图识别与路由分发</a><time datetime="2026-10-15T16:00:00.000Z" title="Created 2026-10-16 00:00:00">2026-10-16</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/09/11/Node%E5%BA%95%E5%B1%82%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF%E4%B8%8E%E5%B9%B6%E5%8F%91/" title="Node在AI时代有哪些优势？">Node在AI时代有哪些优势？</a><time datetime="2026-09-11T08:20:00.000Z" title="Created 2026-09-11 16:20:00">2026-09-11</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/08/23/Docker%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B02/" title="Docker学习笔记2">Docker学习笔记2</a><time datetime="2026-08-23T10:39:33.000Z" title="Created 2026-08-23 18:39:33">2026-08-23</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/08/23/Docker%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" title="Docker学习笔记">Docker学习笔记</a><time datetime="2026-08-23T04:02:19.000Z" title="Created 2026-08-23 12:02:19">2026-08-23</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 - 2026 By John Doe</span><span class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 8.1.1</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.7.0</a></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Reading Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Toggle Between Light and Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle Between Single-column and Double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Settings"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table of Contents"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="Back to Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.7.0"></script><script src="/js/main.js?v=5.7.0"></script><div class="js-pjax"><script>(() => {
+  const parseViewBox = viewBox => {
+    if (!viewBox) return null
+    const parts = viewBox.trim().split(/[\s,]+/).map(n => Number(n))
+    if (parts.length !== 4 || parts.some(n => Number.isNaN(n))) return null
+    return parts
+  }
+
+  const getSvgViewBox = svg => {
+    const attr = parseViewBox(svg.getAttribute('viewBox'))
+    if (attr) return attr
+
+    // Fallback: use bbox to build a viewBox
+    try {
+      const bbox = svg.getBBox()
+      if (bbox && bbox.width && bbox.height) return [bbox.x, bbox.y, bbox.width, bbox.height]
+    } catch (e) {
+      // getBBox may fail on some edge cases; ignore
+    }
+
+    const w = Number(svg.getAttribute('width')) || 0
+    const h = Number(svg.getAttribute('height')) || 0
+    if (w > 0 && h > 0) return [0, 0, w, h]
+    return [0, 0, 100, 100]
+  }
+
+  const setSvgViewBox = (svg, vb) => {
+    svg.setAttribute('viewBox', `${vb[0]} ${vb[1]} ${vb[2]} ${vb[3]}`)
+  }
+
+  const clamp = (v, min, max) => Math.max(min, Math.min(max, v))
+
+  const openSvgInNewTab = ({ source, initViewBox }) => {
+    const getClonedSvg = () => {
+      if (typeof source === 'string') {
+        const template = document.createElement('template')
+        template.innerHTML = source.trim()
+        const svg = template.content.querySelector('svg')
+        return svg ? svg.cloneNode(true) : null
+      }
+      if (source && typeof source.cloneNode === 'function') {
+        return source.cloneNode(true)
+      }
+      return null
+    }
+
+    const clone = getClonedSvg()
+    if (!clone) return
+    if (initViewBox && initViewBox.length === 4) {
+      clone.setAttribute('viewBox', initViewBox.join(' '))
+    }
+    if (!clone.getAttribute('xmlns')) clone.setAttribute('xmlns', 'http://www.w3.org/2000/svg')
+    if (!clone.getAttribute('xmlns:xlink') && clone.innerHTML.includes('xlink:')) {
+      clone.setAttribute('xmlns:xlink', 'http://www.w3.org/1999/xlink')
+    }
+    // inject background to match current theme
+    const isDark = document.documentElement.getAttribute('data-theme') === 'dark'
+    const bg = getComputedStyle(document.body).backgroundColor || (isDark ? '#1e1e1e' : '#ffffff')
+    if (!clone.style.background) clone.style.background = bg
+
+    const serializer = new XMLSerializer()
+    const svgSource = serializer.serializeToString(clone)
+    const htmlSource = `<!doctype html><html><head><meta charset="utf-8" />
+      <style>
+        html, body { width: 100%; height: 100%; margin: 0; display: flex; align-items: center; justify-content: center; background: ${bg}; }
+        svg { max-width: 100%; max-height: 100%; height: auto; width: auto; }
+      </style>
+      </head><body>${svgSource}</body></html>`
+    const blob = new Blob([htmlSource], { type: 'text/html;charset=utf-8' })
+    const url = URL.createObjectURL(blob)
+    window.open(url, '_blank', 'noopener')
+
+    setTimeout(() => URL.revokeObjectURL(url), 5000)
+  }
+
+  const attachMermaidViewerButton = wrap => {
+    let btn = wrap.querySelector('.mermaid-open-btn')
+    if (!btn) {
+      btn = document.createElement('button')
+      btn.type = 'button'
+      btn.className = 'mermaid-open-btn'
+      wrap.appendChild(btn)
+    }
+
+    btn.innerHTML = '<i class="fa fa-search fa-fw" aria-hidden="true"></i>'
+
+    if (!btn.__mermaidViewerBound) {
+      btn.addEventListener('click', e => {
+        e.preventDefault()
+        e.stopPropagation()
+        const svg = wrap.__mermaidOriginalSvg || wrap.querySelector('svg')
+        if (!svg) return
+        const initViewBox = wrap.__mermaidInitViewBox
+        openSvgInNewTab({ source: svg, initViewBox })
+      })
+      btn.__mermaidViewerBound = true
+    }
+  }
+
+  // Zoom around a point (px, py) in the SVG viewport (in viewBox coordinates)
+  const zoomAtPoint = (vb, factor, px, py) => {
+    const w = vb[2] * factor
+    const h = vb[3] * factor
+    const nx = px - (px - vb[0]) * factor
+    const ny = py - (py - vb[1]) * factor
+    return [nx, ny, w, h]
+  }
+
+  const initMermaidGestures = wrap => {
+    // Clean up previous event listeners and pending frames
+    if (wrap.__mermaidAbortController) {
+      wrap.__mermaidAbortController.abort()
+      if (wrap.__mermaidRafId) cancelAnimationFrame(wrap.__mermaidRafId)
+    }
+    const ac = new AbortController()
+    wrap.__mermaidAbortController = ac
+    const svg = wrap.querySelector('svg')
+    if (!svg) return
+
+    // Ensure viewBox exists so gestures always work
+    const initVb = getSvgViewBox(svg)
+    wrap.__mermaidInitViewBox = initVb
+    wrap.__mermaidCurViewBox = initVb.slice()
+    setSvgViewBox(svg, initVb)
+    // Disable default gestures to prevent scroll chaining and pinch-zoom penetration in Chrome
+    svg.style.touchAction = 'none'
+
+    // Cache BoundingClientRect, throttled on scroll to reduce reflow
+    let cachedRect = svg.getBoundingClientRect()
+    let rectDirty = false
+    const markRectDirty = () => { rectDirty = true }
+    window.addEventListener('resize', markRectDirty, { signal: ac.signal })
+    window.addEventListener('scroll', markRectDirty, { signal: ac.signal, capture: true })
+    const getRect = () => {
+      if (rectDirty) {
+        cachedRect = svg.getBoundingClientRect()
+        rectDirty = false
+      }
+      return cachedRect
+    }
+
+    // Precompute clamp bounds from initial viewBox
+    const minW = initVb[2] * 0.1
+    const maxW = initVb[2] * 10
+    const minH = initVb[3] * 0.1
+    const maxH = initVb[3] * 10
+    const clampVb = vb => {
+      const out = vb.slice()
+      out[2] = clamp(out[2], minW, maxW)
+      out[3] = clamp(out[3], minH, maxH)
+      return out
+    }
+
+    // Throttle DOM updates using requestAnimationFrame
+    let pendingVb = null
+    let rafId = null
+    const applyVb = () => {
+      if (pendingVb) {
+        wrap.__mermaidCurViewBox = pendingVb
+        setSvgViewBox(svg, pendingVb)
+        pendingVb = null
+      }
+      rafId = null
+      wrap.__mermaidRafId = null
+    }
+    const setCurVb = vb => {
+      pendingVb = clampVb(vb)
+      if (!rafId) {
+        rafId = requestAnimationFrame(applyVb)
+        wrap.__mermaidRafId = rafId
+      }
+    }
+
+    const state = {
+      pointers: new Map(),
+      startVb: null,
+      startDist: 0,
+      lastPointerX: 0,
+      lastPointerY: 0
+    }
+
+    const onPointerDown = e => {
+      if (e.pointerType === 'mouse' && e.button !== 0) return
+      svg.setPointerCapture(e.pointerId)
+      const curVb = wrap.__mermaidCurViewBox
+      state.pointers.set(e.pointerId, { x: e.clientX, y: e.clientY })
+      if (state.pointers.size === 1) {
+        state.startVb = curVb.slice()
+        state.lastPointerX = e.clientX
+        state.lastPointerY = e.clientY
+      } else if (state.pointers.size === 2) {
+        const pts = [...state.pointers.values()]
+        const dx = pts[0].x - pts[1].x
+        const dy = pts[0].y - pts[1].y
+        state.startDist = Math.hypot(dx, dy)
+        state.startVb = curVb.slice()
+      }
+    }
+
+    const onPointerMove = e => {
+      if (!state.pointers.has(e.pointerId)) return
+      state.pointers.set(e.pointerId, { x: e.clientX, y: e.clientY })
+      const curVb = wrap.__mermaidCurViewBox
+      const rect = getRect()
+      if (state.pointers.size === 1 && state.startVb) {
+        const p = state.pointers.values().next().value
+        const dxClient = p.x - state.lastPointerX
+        const dyClient = p.y - state.lastPointerY
+        state.lastPointerX = p.x
+        state.lastPointerY = p.y
+        const dx = dxClient * (curVb[2] / rect.width)
+        const dy = dyClient * (curVb[3] / rect.height)
+        setCurVb([curVb[0] - dx, curVb[1] - dy, curVb[2], curVb[3]])
+        return
+      }
+      if (state.pointers.size === 2 && state.startVb && state.startDist > 0) {
+        const pts = [...state.pointers.values()]
+        const dx = pts[0].x - pts[1].x
+        const dy = pts[0].y - pts[1].y
+        const dist = Math.hypot(dx, dy)
+        if (!dist) return
+        const factor = state.startDist / dist
+        const cx = (pts[0].x + pts[1].x) / 2
+        const cy = (pts[0].y + pts[1].y) / 2
+        const px = curVb[0] + (cx - rect.left) * (curVb[2] / rect.width)
+        const py = curVb[1] + (cy - rect.top) * (curVb[3] / rect.height)
+        setCurVb(zoomAtPoint(state.startVb, factor, px, py))
+      }
+    }
+
+    const onPointerUpOrCancel = e => {
+      // Release PointerCapture to avoid event capture anomalies
+      if (svg.hasPointerCapture && svg.hasPointerCapture(e.pointerId)) {
+        svg.releasePointerCapture(e.pointerId)
+      }
+      state.pointers.delete(e.pointerId)
+      if (state.pointers.size === 0) {
+        state.startVb = null
+        state.startDist = 0
+      } else if (state.pointers.size === 1) {
+        const p = state.pointers.values().next().value
+        state.lastPointerX = p.x
+        state.lastPointerY = p.y
+      }
+    }
+
+    const onWheel = e => {
+      // Prevent event bubbling from triggering external scroll
+      e.preventDefault()
+      e.stopPropagation()
+      // Normalize deltaY across deltaMode (Chrome uses pixels, Safari uses lines)
+      let delta = e.deltaY
+      if (e.deltaMode === 1) delta *= 16
+      else if (e.deltaMode === 2) delta *= 400
+
+      // Continuous zoom factor: smoother than fixed 1.1/0.9 steps
+      const zoomFactor = Math.pow(1.001, delta)
+
+      const curVb = wrap.__mermaidCurViewBox
+      const rect = getRect()
+      const px = curVb[0] + (e.clientX - rect.left) * (curVb[2] / rect.width)
+      const py = curVb[1] + (e.clientY - rect.top) * (curVb[3] / rect.height)
+      setCurVb(zoomAtPoint(curVb, zoomFactor, px, py))
+    }
+
+    const onDblClick = () => {
+      const init = wrap.__mermaidInitViewBox
+      if (init) setCurVb(init)
+    }
+
+    svg.addEventListener('pointerdown', onPointerDown, { signal: ac.signal })
+    svg.addEventListener('pointermove', onPointerMove, { signal: ac.signal })
+    svg.addEventListener('pointerup', onPointerUpOrCancel, { signal: ac.signal })
+    svg.addEventListener('pointercancel', onPointerUpOrCancel, { signal: ac.signal })
+    svg.addEventListener('wheel', onWheel, { passive: false, signal: ac.signal })
+    svg.addEventListener('dblclick', onDblClick, { signal: ac.signal })
+  }
+
+  const runMermaid = ele => {
+    window.loadMermaid = true
+    const theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'default'
+    ele.forEach((item, index) => {
+      const mermaidSrc = item.firstElementChild
+      // Clean up event listeners before removing old SVG
+      if (item.__mermaidAbortController) {
+        item.__mermaidAbortController.abort()
+      }
+      const oldSvg = item.querySelector('svg')
+      if (oldSvg) oldSvg.remove()
+      let config = {}
+      try {
+        config = mermaidSrc.dataset.config ? JSON.parse(mermaidSrc.dataset.config) : {}
+      } catch (e) {
+        console.warn('[mermaid] failed to parse dataset.config:', e)
+      }
+      if (!config.theme) {
+        config.theme = theme
+      }
+      const mermaidThemeConfig = `%%{init: ${JSON.stringify(config)}}%%\n`
+      const mermaidID = `mermaid-${index}`
+      const mermaidDefinition = mermaidThemeConfig + mermaidSrc.textContent
+
+      const renderMermaid = svg => {
+        mermaidSrc.insertAdjacentHTML('afterend', svg)
+        if (true) initMermaidGestures(item)
+        item.__mermaidOriginalSvg = svg
+        if (true) attachMermaidViewerButton(item)
+      }
+
+      const handleError = err => {
+        console.error(`[mermaid] render failed for block #${index}:`, err)
+        const errorEl = document.createElement('div')
+        errorEl.className = 'mermaid-error'
+        errorEl.textContent = `Mermaid render error: ${err.message || err}`
+        mermaidSrc.insertAdjacentElement('afterend', errorEl)
+      }
+
+      try {
+        const renderFn = mermaid.render(mermaidID, mermaidDefinition)
+        // mermaid v9 and v10 compatibility
+        if (typeof renderFn === 'string') {
+          renderMermaid(renderFn)
+        } else {
+          renderFn.then(({ svg }) => renderMermaid(svg)).catch(handleError)
+        }
+      } catch (err) {
+        handleError(err)
+      }
+    })
+  }
+
+  const codeToMermaid = $article => {
+    const codeMermaidEle = $article.querySelectorAll('pre > code.mermaid')
+    if (codeMermaidEle.length === 0) return
+
+    codeMermaidEle.forEach(ele => {
+      const preEle = document.createElement('pre')
+      preEle.className = 'mermaid-src'
+      preEle.hidden = true
+      preEle.textContent = ele.textContent
+      const newEle = document.createElement('div')
+      newEle.className = 'mermaid-wrap'
+      newEle.appendChild(preEle)
+      ele.parentNode.replaceWith(newEle)
+    })
+  }
+
+  const loadMermaid = () => {
+    const $article = document.getElementById('article-container')
+    if (!$article) return
+
+    if (false) codeToMermaid($article)
+    const $mermaid = $article.querySelectorAll('.mermaid-wrap')
+    if ($mermaid.length === 0) return
+
+    const runMermaidFn = () => runMermaid($mermaid)
+    btf.addGlobalFn('themeChange', runMermaidFn, 'mermaid')
+    window.loadMermaid ? runMermaidFn() : btf.getScript('https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.9.1/mermaid.min.js').then(runMermaidFn)
+  }
+
+  btf.addGlobalFn('encrypt', loadMermaid, 'mermaid')
+  window.pjax ? loadMermaid() : document.addEventListener('DOMContentLoaded', loadMermaid)
+})()</script></div><script src="/js/mermaid-fallback.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
